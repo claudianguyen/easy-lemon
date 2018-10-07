@@ -12,6 +12,7 @@ from bs4 import BeautifulSoup
 
 
 print("Hello World")
+print ("Creating url...")
 url = UrlCreator("indeed")
 
 # conducting a request of the stated URL above:
