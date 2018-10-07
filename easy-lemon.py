@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 # Defined classes
 from url.UrlCreator import UrlCreator
