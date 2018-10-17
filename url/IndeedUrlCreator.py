@@ -21,11 +21,10 @@ class IndeedUrlCreator(BaseUrlCreator):
     def parse_job_salary(self):
         """
         Parses the job_salary for Indeed. Adds any additional parameters for the Indeed salary query.
-        Note: Indeed uses "%24" to signify the start of the salary query, and uses "%2C" as a delimitter for commas.
+        Note: Indeed uses "%24" to signify the start of the salary query, and uses "%2C" as a delimiter for commas.
         :return: String that represents the salary parameter for an Indeed url.
         """
-        indeed_salary_identifier = "+%24"
-        return indeed_salary_identifier + self.job_salary.replace(",", "%2C")
+        return "+%24" + self.job_salary.replace(",", "%2C")
 
     def generate_url(self):
         """

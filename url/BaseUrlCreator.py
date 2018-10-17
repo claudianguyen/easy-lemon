@@ -11,6 +11,10 @@ class BaseUrlCreator:
         self.job_salary = job_salary
 
     def generate_url(self):
+        """
+        Entry point for the UrlCreator.
+        :return: A string of the url to scrape.
+        """
         return "https://www.indeed.com/jobs?q=data+scientist+%2420%2C000&l=New+York&start=10"
 
     def parse_job_title(self):
