@@ -1,6 +1,7 @@
 import requests
 import bs4
 from bs4 import BeautifulSoup
+from entities.JobInfo import JobInfo
 
 class BaseParser:
     """ Represents a parser. Want to parse each result. """
@@ -8,11 +9,18 @@ class BaseParser:
     def __init__(self, html_page):
         """Initializes the data."""
         self.html_page = html_page
+        self.job_results = []
 
-    def extract_company_title(self, html_page):
+    def get_job_results(self):
         """
-        Entry point for the UrlCreator.
-        :return: A string of the url to scrape.
+        Returns the list of JobInfo object created by our parsing logic.
+        :return:
         """
-        return "Ellie Mae"
+        return self.job_results
 
+    def extract_job_results(self):
+        """
+        Entry point for the parsing of the job information for our job search.
+        :return:
+        """
+        self.job_results = self.job_results.append(JobInfo("Title", "Location", "Company", "URL", "Salary"))
