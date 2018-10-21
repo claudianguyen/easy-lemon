@@ -27,5 +27,6 @@ soup = BeautifulSoup(indeedPage.text, "html.parser")
 # print(soup.prettify())
 
 
+# Extract url
 
 
