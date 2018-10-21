@@ -1,10 +1,12 @@
 import requests
 import bs4
 from bs4 import BeautifulSoup
+import urllib.parse
+
 from entities.JobInfo import JobInfo
 
 class BaseParser:
-    """ Represents a parse. Want to parse each result. """
+    """ Represents a parser. Want to parse each result. """
 
     def __init__(self, html_page):
         """Initializes the data."""
