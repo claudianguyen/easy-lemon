@@ -3,7 +3,7 @@
 
 # Defined classes
 from url.IndeedUrlCreator import IndeedUrlCreator
-from parser.IndeedParser import IndeedParser
+from parse.IndeedParser import IndeedParser
 
 import requests
 from bs4 import BeautifulSoup
@@ -22,11 +22,11 @@ indeed_page = requests.get(indeed_url_creator.generate_url())
 
 # specifying a desired format of “page” using the html parser - this allows python to read the various components
 # of the page, rather than treating it as one long string.
-indeedSoup = BeautifulSoup(indeed_page.text, "html.parser")
+indeed_soup = BeautifulSoup(indeed_page.text, "html.parser")
 
 # printing soup in a more structured tree format that makes for easier reading
-# print(soup.prettify())
-indeed_parser = IndeedParser(indeedSoup)
+# print(indeed_soup.prettify())
+indeed_parser = IndeedParser(indeed_soup)
 indeed_parser.extract_job_results()
 indeed_job_results = indeed_parser.get_job_results()
 print(indeed_job_results)
