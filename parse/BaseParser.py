@@ -23,4 +23,4 @@ class BaseParser:
         Entry point for the parsing of the job information for our job search.
         :return:
         """
-        self.job_results = self.job_results.append(JobInfo("Title", "Location", "Company", "URL", "Salary"))
+        self.job_results.append(JobInfo("Title", "Location", "Company", "URL", "Salary"))

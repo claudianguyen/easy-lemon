@@ -5,8 +5,9 @@
 from url.IndeedUrlCreator import IndeedUrlCreator
 from parse.IndeedParser import IndeedParser
 
-import requests
+# External libraries
 from bs4 import BeautifulSoup
+import requests
 
 # import pandas as pd
 # import time
