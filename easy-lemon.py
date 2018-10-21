@@ -19,7 +19,7 @@ indeed_url_creator = IndeedUrlCreator("software engineer", "San Francisco", "120
 
 # conducting a request of the stated URL above:
 print("Creating Indeed url: " + indeed_url_creator.generate_url())
-indeed_page = requests.get(indeed_url_creator.generate_url())
+#indeed_page = requests.get(indeed_url_creator.generate_url())
 
 # specifying a desired format of “page” using the html parser - this allows python to read the various components
 # of the page, rather than treating it as one long string.
