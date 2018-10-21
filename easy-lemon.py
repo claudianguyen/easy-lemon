@@ -26,7 +26,7 @@ print("Creating Indeed url: " + indeed_url_creator.generate_url())
 
 indeed_page_sample = ""
 
-with open("samples/indeedSearchResults.html", "r") as indeed_file:
+with open("samples/IndeedSearchResults.html", "r") as indeed_file:
     indeed_page_sample = indeed_file.read()
 
 # indeed_soup = BeautifulSoup(indeed_page.text, "html.parser")
