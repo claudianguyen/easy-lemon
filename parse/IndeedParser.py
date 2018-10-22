@@ -1,5 +1,6 @@
 from entities.JobInfo import JobInfo
 from parse.BaseParser import BaseParser
+
 from urllib.parse import urljoin
 
 
@@ -32,3 +33,5 @@ class IndeedParser(BaseParser):
             self.job_results.append(job_info)
             print(job_info)
         print(len(self.job_results))
+
+
