@@ -1,21 +1,23 @@
 from url.BaseUrlCreator import BaseUrlCreator
 
+
 class IndeedUrlCreator(BaseUrlCreator):
     """Represents a url creator. """
 
     # Defined parameters
     salary = 0
     url_endpoint = "https://www.indeed.com/jobs?q="
+    converted_space_symbol = "+"
 
     def __init__(self, job_title, job_location, job_salary):
         """Initializes the data."""
         super().__init__(job_title, job_location, job_salary)
 
-    def parse_job_location(self):
+    def parse_job_location(self, symbol):
         """
         Parses the job_location for Indeed. Adds the Indeed query parameter for location.
         """
-        job_location = super().parse_job_location()
+        job_location = super().parse_job_location(self.white_space, self.converted_space_symbol)
         return "&l=" + job_location
 
     def parse_job_salary(self):
@@ -31,4 +33,7 @@ class IndeedUrlCreator(BaseUrlCreator):
         Url for Indeed: This will contain all the query parameters given to the IndeedUrlCreator.
         :return: String that represents a full job query on Indeed.
         """
-        return self.url_endpoint + self.parse_job_title() + self.parse_job_salary() + self.parse_job_location()
+        return self.url_endpoint \
+            + self.parse_job_title(self.white_space, self.converted_space_symbol) \
+            + self.parse_job_salary() \
+            + self.parse_job_location(self.converted_space_symbol)
