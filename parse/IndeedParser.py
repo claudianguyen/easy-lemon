@@ -23,6 +23,7 @@ class IndeedParser(BaseParser):
             with open("samples/indeed/descriptions/description" + str(test_description) + ".html", "r") as job_description:
                 description_sample = job_description.read()
                 self.filter_job_description(description_sample)
+                job_description.close()
 
         print(len(self.job_results))
 
