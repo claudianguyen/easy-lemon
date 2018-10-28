@@ -45,7 +45,7 @@ class JobInfo:
     def __str__(self):
         """
         Updated str() method so we format JobInfo as a dictionary.
-        :return: string representation of adictionary.
+        :return: string representation of a dictionary.
         """
         return str(self.job_info)
 
