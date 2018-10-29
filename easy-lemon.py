@@ -3,8 +3,11 @@
 
 # Defined classes
 from entities.JobQuery import JobQuery
-from url.IndeedUrlCreator import IndeedUrlCreator
 from parse.IndeedParser import IndeedParser
+from url.IndeedUrlCreator import IndeedUrlCreator
+from url.LinkedInUrlCreator import LinkedInUrlCreator
+
+# Sample generator class
 from samples.SampleDataCreator import SampleDataCreator
 
 
@@ -19,17 +22,20 @@ import requests
 def execute():
     """
     Entry
-    :return:
     """
     # Core logic that does the actual searching/parsing.
     print("Hello World")
-    print ("Creating url...")
 
     job_query = build_job_query("Software Engineer", "San Francisco", "120,000")
     execute_indeed_query(job_query)
+    execute_linkedin_query(job_query)
 
 
 def execute_indeed_query(job_query):
+    """
+    Executes job queries for Indeed.
+    :param job_query: Desired search parameters
+    """
     indeed_url_creator = \
         IndeedUrlCreator(job_query.get_job_title(), job_query.get_job_location(), job_query.get_job_salary())
 
@@ -55,15 +61,20 @@ def execute_indeed_query(job_query):
     indeed_job_results = indeed_parser.get_job_results()
     print(indeed_job_results)
 
-    # Create sample descriptions (for indeed)
-    # sample_data_creator = SampleDataCreator()
-    # sample_data_creator.create_description_files(indeed_job_results, "indeed")
-    # print("Finished creating sample data in samples/indeed/descriptions.")
+
+def create_sample_data(job_results, job_site):
+    """
+    Creates sample data into samples folder
+    :return: void
+    """
+    sample_data_creator = SampleDataCreator()
+    sample_data_creator.create_description_files(job_results, job_site)
+    print("Finished creating sample data in samples/indeed/descriptions.")
 
 
 def build_job_query(job_title, job_location, job_salary=""):
     """
-    Builds a JobQuery object. This method will deal with sanitization and lowercaseing as well.
+    Builds a JobQuery object. This method will deal with sanitization and lowercasing as well.
     TODO: Sanitization.
     :param job_title: The desired title for the job.
     :param job_location: The desired location for the job.
@@ -73,5 +84,18 @@ def build_job_query(job_title, job_location, job_salary=""):
     return JobQuery(job_title.lower(), job_location.lower(), job_salary.lower())
 
 
+def execute_linkedin_query(job_query):
+    """
+    Executes job queries for LinkedIn
+    :param: job_query: Desired search parameters
+    """
+    linkedin_url_creator = LinkedInUrlCreator(job_query.get_job_title(), job_query.get_job_location())
+    print("Creating LinkedIn url: ", linkedin_url_creator.generate_url())
+
+
 if __name__ == "__main__":
     execute()
+
+
+
+
