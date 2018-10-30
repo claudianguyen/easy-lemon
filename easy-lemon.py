@@ -23,7 +23,7 @@ def execute():
     """
     # Core logic that does the actual searching/parsing.
     print("Hello World")
-    print ("Creating url...")
+    print("Creating url...")
 
     job_query = build_job_query("Software Engineer", "San Francisco", "120,000")
     execute_indeed_query(job_query)
