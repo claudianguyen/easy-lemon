@@ -3,9 +3,10 @@
 
 # Defined classes
 from entities.JobQuery import JobQuery
-from url.IndeedUrlCreator import IndeedUrlCreator
+from lemon_peeler.lemon_peeler.spiders.IndeedSpider import IndeedSpider
 from parse.IndeedParser import IndeedParser
 from samples.SampleDataCreator import SampleDataCreator
+from url.IndeedUrlCreator import IndeedUrlCreator
 
 
 # External libraries
@@ -14,12 +15,18 @@ import requests
 
 # import pandas as pd
 # import time
+import scrapy
+from scrapy.crawler import CrawlerProcess
 
+
+# Crawler process for scraping.
+process = CrawlerProcess({
+    'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
+})
 
 def execute():
     """
-    Entry
-    :return:
+    Entry point for easy-lemon.py. This method begins the job search.
     """
     # Core logic that does the actual searching/parsing.
     print("Hello World")
@@ -27,6 +34,8 @@ def execute():
 
     job_query = build_job_query("Software Engineer", "San Francisco", "120,000")
     execute_indeed_query(job_query)
+
+    process.start()  # the script will block here until the crawling is finished
 
 
 def execute_indeed_query(job_query):
@@ -41,6 +50,7 @@ def execute_indeed_query(job_query):
     # of the page, rather than treating it as one long string.
 
     indeed_page_sample = ""
+    process.crawl(IndeedSpider, indeed_url_creator.generate_url())
 
     with open("samples/indeed/searchResults.html", "r") as indeed_file:
         indeed_page_sample = indeed_file.read()
@@ -51,9 +61,9 @@ def execute_indeed_query(job_query):
     # printing soup in a more structured tree format that makes for easier reading
     # print(indeed_soup.prettify())
     indeed_parser = IndeedParser(indeed_soup)
-    indeed_parser.extract_job_results()
-    indeed_job_results = indeed_parser.get_job_results()
-    print(indeed_job_results)
+    # indeed_parser.extract_job_results()
+    # indeed_job_results = indeed_parser.get_job_results()
+    # print(indeed_job_results)
 
     # Create sample descriptions (for indeed)
     # sample_data_creator = SampleDataCreator()
