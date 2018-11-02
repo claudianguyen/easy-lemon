@@ -60,7 +60,7 @@ def execute_indeed_query(job_query):
 
     # printing soup in a more structured tree format that makes for easier reading
     # print(indeed_soup.prettify())
-    indeed_parser = IndeedParser(indeed_soup)
+    # indeed_parser = IndeedParser(indeed_soup)
     # indeed_parser.extract_job_results()
     # indeed_job_results = indeed_parser.get_job_results()
     # print(indeed_job_results)
