@@ -5,10 +5,16 @@
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/items.html
 
-import scrapy
+from scrapy.item import Item, Field
 
 
-class LemonPeelerItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
+class JobInfo(Item):
+    """
+    Models for Job Info
+    """
+    job_title = Field()
+    job_location = Field()
+    job_url = Field()
+    job_company = Field()
+    job_salary = Field()
     pass

@@ -1,7 +1,6 @@
 
 from bs4 import BeautifulSoup
 import requests
-from entities.JobInfo import JobInfo
 import time
 
 

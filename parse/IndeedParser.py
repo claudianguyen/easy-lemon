@@ -1,8 +1,9 @@
-from entities.JobInfo import JobInfo
 from parse.BaseParser import BaseParser
 
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
+
+from lemon_peeler.lemon_peeler.items import JobInfo
 
 
 class IndeedParser(BaseParser):
@@ -49,7 +50,12 @@ class IndeedParser(BaseParser):
         snippet = job_row.find(name="td", attrs={"class", "snip"})
         salary_element = snippet.find(name="span", attrs={"class", "no-wrap"})
         salary = salary_element.text.strip() if salary_element else "N/A"
-        job_info = JobInfo(title, location, url, company, salary)
+        job_info = JobInfo()
+        job_info['job_title'] = title
+        job_info['job_location'] = location
+        job_info['job_url'] = url
+        job_info['job_company'] = company
+        job_info['job_salary'] = salary
         print(job_info)
         return job_info
 
