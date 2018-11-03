@@ -23,6 +23,7 @@ class IndeedSpider(Spider):
         self.start_url = start_url
         self.num_results = int(num_results)
         self.found_jobs = []
+        self.selected_jobs = []
         super(IndeedSpider, self).__init__()
 
     def start_requests(self):
@@ -36,6 +37,7 @@ class IndeedSpider(Spider):
         # Grab basic info for jobInfo based on the results page.
         for job_row in job_results:
             job_info = self.setup_job_info(job_row)
+            # yield Request(url=job_info['job_url'], callback=self.parse_job_description, meta={'job_info': job_info})
             self.found_jobs.append(job_info)
 
         # Find next button.
@@ -43,9 +45,11 @@ class IndeedSpider(Spider):
         if next_button and (len(self.found_jobs) < self.num_results):
             yield response.follow(next_button, self.parse)
         else:
-            print(self.found_jobs)
-            print(len(self.found_jobs))
-            yield self.found_jobs
+            # print(self.found_jobs)
+
+            # Finished scraping the results, so now scrape the description pages.
+            for job_info in self.found_jobs:
+                yield Request(url=job_info['job_url'], callback=self.parse_job_description, meta={'job_info': job_info})
 
     def setup_job_info(self, job_row):
         """
@@ -73,3 +77,15 @@ class IndeedSpider(Spider):
         # Format job_info.
         FormatUtils.format_job_info(job_info)
         return job_info
+
+    def parse_job_description(self, response):
+        """
+        Parses the job description and calls the appropriate filters to process the job description data.
+        The job_info will be passed in via the response's meta tag.
+        :return:
+        """
+        job_info = response.meta.get('job_info')
+        if job_info:
+            self.selected_jobs.append(job_info)
+            yield job_info
+
