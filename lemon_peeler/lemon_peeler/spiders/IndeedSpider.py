@@ -17,9 +17,9 @@ class IndeedSpider(Spider):
         params = args[0]
         # start_url: Url to start scraping.
         start_url = params[0]
-
         # num_results: Desired number of results to process.
         num_results = params[1]
+
         self.start_url = start_url
         self.num_results = int(num_results)
         self.found_jobs = []
