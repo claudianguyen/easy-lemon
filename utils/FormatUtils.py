@@ -12,7 +12,7 @@ def format_job_info(job_info):
     """
     for charc in job_info.keys():
         job_charc = job_info[charc]
-        if job_charc:
+        if job_charc and job_charc.strip():
             job_info[charc] = job_charc.strip()
         else:
             job_info[charc] = "N/A"

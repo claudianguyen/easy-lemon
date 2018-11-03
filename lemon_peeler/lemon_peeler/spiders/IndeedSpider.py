@@ -9,13 +9,21 @@ class IndeedSpider(Spider):
     name = "indeed_spider"
     BASE_URL = "https://www.indeed.com/"
 
-    def __init__(self, start_url):
+    def __init__(self, *args):
         """
         Handle arguments passed in by the caller.
-        :param start_url: Url to begin scraping.
+        :param args: Passed in arguments to the spider.
         """
-        super(IndeedSpider, self).__init__(start_url)
+        params = args[0]
+        # start_url: Url to start scraping.
+        start_url = params[0]
+
+        # num_results: Desired number of results to process.
+        num_results = params[1]
         self.start_url = start_url
+        self.num_results = int(num_results)
+        self.found_jobs = []
+        super(IndeedSpider, self).__init__()
 
     def start_requests(self):
         yield Request(url=self.start_url, callback=self.parse)
@@ -28,12 +36,20 @@ class IndeedSpider(Spider):
         # Grab basic info for jobInfo based on the results page.
         for job_row in job_results:
             job_info = self.setup_job_info(job_row)
-            print(job_info)
-        print(len(job_results))
+            self.found_jobs.append(job_info)
+
+        # Find next button.
+        next_button = response.xpath('//div[@class="pagination"]//a[contains(span, "Next")]/@href').extract_first()
+        if next_button and (len(self.found_jobs) < self.num_results):
+            yield response.follow(next_button, self.parse)
+        else:
+            print(self.found_jobs)
+            print(len(self.found_jobs))
+            yield self.found_jobs
 
     def setup_job_info(self, job_row):
         """
-        Returns and sets up the intial jobInfo acquired from the results page.
+        Returns and sets up the initial jobInfo acquired from the results page.
         :param job_row: a row from the job results page.
         :return: jobInfo
         """
@@ -51,7 +67,8 @@ class IndeedSpider(Spider):
         job_info['job_url'] = \
             urljoin(self.BASE_URL, job_row.xpath('.//a[@data-tn-element="jobTitle"]/@href').extract_first())
         # Parse salary information, if available.
-        job_info['job_salary'] = job_row.xpath('.//td[@class="snip"]/div/span[@class="no-wrap"]//text()').extract_first()
+        job_info['job_salary'] = \
+            job_row.xpath('.//td[@class="snip"]/div/span[@class="no-wrap"]//text()').extract_first()
 
         # Format job_info.
         FormatUtils.format_job_info(job_info)

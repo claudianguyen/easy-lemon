@@ -24,6 +24,7 @@ process = CrawlerProcess({
     'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
 })
 
+
 def execute():
     """
     Entry point for easy-lemon.py. This method begins the job search.
@@ -50,7 +51,7 @@ def execute_indeed_query(job_query):
     # of the page, rather than treating it as one long string.
 
     indeed_page_sample = ""
-    process.crawl(IndeedSpider, indeed_url_creator.generate_url())
+    process.crawl(IndeedSpider, [indeed_url_creator.generate_url(), 50])
 
     with open("samples/indeed/searchResults.html", "r") as indeed_file:
         indeed_page_sample = indeed_file.read()
