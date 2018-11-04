@@ -1,4 +1,4 @@
-from lemon_peeler.lemon_peeler.items import JobInfo
+from items import JobInfo
 from utils import FormatUtils
 
 from scrapy import Spider, Request
@@ -9,18 +9,13 @@ class IndeedSpider(Spider):
     name = "indeed_spider"
     BASE_URL = "https://www.indeed.com/"
 
-    def __init__(self, *args):
+    def __init__(self, url=None, num_results=None):
         """
         Handle arguments passed in by the caller.
-        :param args: Passed in arguments to the spider.
+        :param url: Desired url to start scraping.
+        :param num_results: Desired number of results to process.
         """
-        params = args[0]
-        # start_url: Url to start scraping.
-        start_url = params[0]
-        # num_results: Desired number of results to process.
-        num_results = params[1]
-
-        self.start_url = start_url
+        self.start_url = url
         self.num_results = int(num_results)
         self.found_jobs = []
         self.selected_jobs = []
@@ -45,7 +40,6 @@ class IndeedSpider(Spider):
         if next_button and (len(self.found_jobs) < self.num_results):
             yield response.follow(next_button, self.parse)
         else:
-            # print(self.found_jobs)
 
             # Finished scraping the results, so now scrape the description pages.
             for job_info in self.found_jobs:

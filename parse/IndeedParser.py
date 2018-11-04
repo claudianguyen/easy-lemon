@@ -3,7 +3,7 @@ from parse.BaseParser import BaseParser
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 
-from lemon_peeler.lemon_peeler.items import JobInfo
+from items import JobInfo
 
 
 class IndeedParser(BaseParser):

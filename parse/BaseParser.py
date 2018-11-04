@@ -1,9 +1,4 @@
-import requests
-import bs4
-from bs4 import BeautifulSoup
-import urllib.parse
-
-from lemon_peeler.lemon_peeler.items import JobInfo
+from items import JobInfo
 
 
 class BaseParser:
