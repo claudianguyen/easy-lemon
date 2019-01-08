@@ -74,7 +74,7 @@ def execute_indeed_query(job_query):
 
 def build_job_query(job_title, job_location, job_salary=""):
     """
-    Builds a JobQuery object. This method will deal with sanitization and lowercaseing as well.
+    Builds a JobQuery object. This method will deal with sanitization and lowercasing as well.
     TODO: Sanitization.
     :param job_title: The desired title for the job.
     :param job_location: The desired location for the job.
