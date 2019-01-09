@@ -9,7 +9,7 @@ from url.IndeedUrlCreator import IndeedUrlCreator
 
 
 # External libraries
-from flask import Flask
+from flask import Flask, render_template
 # import pandas as pd
 # import time
 from scrapy import Spider
@@ -29,7 +29,7 @@ crawler_settings = {'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT
 
 @app.route("/")
 def root():
-    return "Hello World! Welcome to Easy Lemon!!"
+    return render_template('index.html')
 
 
 @app.route("/job_search")
