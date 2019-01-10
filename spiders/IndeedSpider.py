@@ -1,8 +1,11 @@
 from items import JobInfo
-from utils import FormatUtils
+from utils import FormatUtils, ParseUtils
 
 from scrapy import Spider, Request
 from urllib.parse import urljoin
+
+import logging
+import re
 
 
 class IndeedSpider(Spider):
@@ -39,7 +42,6 @@ class IndeedSpider(Spider):
         if next_button and (len(self.found_jobs) < self.num_results):
             yield response.follow(next_button, self.parse)
         else:
-
             # Finished scraping the results, so now scrape the description pages.
             for job_info in self.found_jobs:
                 yield Request(url=job_info['job_url'], callback=self.parse_job_description, meta={'job_info': job_info})
@@ -73,12 +75,21 @@ class IndeedSpider(Spider):
 
     def parse_job_description(self, response):
         """
-        Parses the job description and calls the appropriate filters to process the job description data.
+        Parses the job description.
         The job_info will be passed in via the response's meta tag.
         :return:
         """
         job_info = response.meta.get('job_info')
+        job_qualifications = response.xpath(
+            '//h2[@class="jobSectionHeader"]/b[text()[contains(., "Qualifications")]]/following::ul')\
+            .extract_first()
+        logging.info(job_qualifications)
+        if job_qualifications:
+            exp = re.match(ParseUtils.NUM_YEARS_EXP_REGEX, job_qualifications)
+            # Must be a number since we parsed it.
+            job_info['job_exp'] = exp
         if job_info:
             self.selected_jobs.append(job_info)
+            FormatUtils.format_job_info(job_info)
             yield job_info
 
