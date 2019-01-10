@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Easy Lemon</title>
+    <script src="{{url_for('static', filename='js/submission.js')}}"></script>
+    <script src="{{url_for('static', filename='js/lib/jquery-3.3.1.min.js')}}"></script>
 </head>
 <body>
 <h1>Welcome to easy lemon. Navigate to /job_search, okay?</h1>
+
+<button class="submit-button" onclick="submitJobSearch()">
+    Submit
+</button>
 
 </body>
 </html>

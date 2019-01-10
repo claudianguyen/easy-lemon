@@ -35,7 +35,6 @@ class IndeedSpider(Spider):
             # yield Request(url=job_info['job_url'], callback=self.parse_job_description, meta={'job_info': job_info})
             self.found_jobs.append(job_info)
 
-        # Find next button.
         next_button = response.xpath('//div[@class="pagination"]//a[contains(span, "Next")]/@href').extract_first()
         if next_button and (len(self.found_jobs) < self.num_results):
             yield response.follow(next_button, self.parse)
