@@ -80,16 +80,15 @@ class IndeedSpider(Spider):
         :return:
         """
         job_info = response.meta.get('job_info')
-        job_qualifications = response.xpath(
-            '//h2[@class="jobSectionHeader"]/b[text()[contains(., "Qualifications")]]/following::ul')\
-            .extract_first()
-        logging.info(job_qualifications)
-        if job_qualifications:
-            exp = re.match(ParseUtils.NUM_YEARS_EXP_REGEX, job_qualifications)
-            # Must be a number since we parsed it.
-            job_info['job_exp'] = exp
-        if job_info:
-            self.selected_jobs.append(job_info)
-            FormatUtils.format_job_info(job_info)
-            yield job_info
+        job_info['job_exp'] = ''
+        job_bullets = response.xpath('//li').extract()
+        for bullet in job_bullets:
+            exp = re.findall(ParseUtils.NUM_YEARS_EXP_REGEX, bullet)
+            if exp and exp[0]:
+                # Must be a number since we parsed it.
+                job_info['job_exp'] = exp[0]
+                break
+        FormatUtils.format_job_info(job_info)
+        self.selected_jobs.append(job_info)
+        yield job_info
 
