@@ -32,12 +32,14 @@ def root():
     return render_template('index.html')
 
 
-@app.route("/job_search")
+@app.route("/job_search", methods=["POST"])
 def execute():
     """
     Entry point for easy-lemon.py. This method begins the job search.
     """
     # Core logic that does the actual searching/parsing.
+
+    # Extract user-provided inputs.
     job_title = request.json['jobTitle']
     job_location = request.json['jobLocation']
     job_salary = request.json['jobSalary']
