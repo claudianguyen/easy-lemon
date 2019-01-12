@@ -6,12 +6,22 @@
     <script src="{{url_for('static', filename='js/submission.js')}}"></script>
     <script src="{{url_for('static', filename='js/lib/jquery-3.3.1.min.js')}}"></script>
 </head>
-<body>
-<h1>Welcome to easy lemon. Navigate to /job_search, okay?</h1>
+<h1>Welcome to easy lemon!</h1>
+<div>
+<form>
+  Job Title/keywords:<br>
+  <input type="text" name="job-title" value="software engineer">
+  <br>
+  Location:<br>
+  <input type="text" name="job-location" value="san mateo">
+  <br>
+  Salary:<br>
+  <input type="text" name="job-salary" value="120000">
+  <br><br>
+  <input type="button" value="Submit" onclick="submitJobSearch()">
+</form>
 
-<button class="submit-button" onclick="submitJobSearch()">
-    Submit
-</button>
 <div id="results"></div>
+</div>
 </body>
 </html>

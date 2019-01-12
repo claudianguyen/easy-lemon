@@ -9,7 +9,7 @@ from url.IndeedUrlCreator import IndeedUrlCreator
 
 
 # External lib
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 # import pandas as pd
 # import time
 from scrapy import Spider
@@ -38,10 +38,11 @@ def execute():
     Entry point for easy-lemon.py. This method begins the job search.
     """
     # Core logic that does the actual searching/parsing.
-    print("Hello World")
-    print("Creating url...")
+    job_title = request.json['jobTitle']
+    job_location = request.json['jobLocation']
+    job_salary = request.json['jobSalary']
 
-    job_query = build_job_query("Software Engineer", "San Francisco", "120,000")
+    job_query = build_job_query(job_title, job_location, job_salary)
     return execute_indeed_query(job_query)
 
     # process.start()  # the script will block here until the crawling is finished

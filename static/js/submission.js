@@ -1,15 +1,21 @@
 function submitJobSearch() {
-    console.log("CLICK");
+    let jobTitle = $('input[name=job-title]').val();
+    let jobLocation = $('input[name=job-location]').val();
+    let jobSalary = $('input[name=job-salary]').val();
+    let requestData = {jobTitle: jobTitle, jobLocation: jobLocation, jobSalary: jobSalary};
     $.ajax({
         url: '/job_search',
 //        method: 'POST',
-        success: helper_function
+        contentType: 'application/json;charset=UTF-8',
+        dataType: 'json',
+        data: JSON.stringify(requestData, null, '\t'),
+        success: updateResults
+
     });
 
 
 };
 
-function helper_function(response) {
-    console.log(response)
+function updateResults(response) {
     $('#results').html(response);
 }
