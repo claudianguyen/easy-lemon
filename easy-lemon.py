@@ -57,6 +57,7 @@ def execute_indeed_query(job_query):
     # conducting a request of the stated URL above:
     # print("Creating Indeed url: " + indeed_url_creator.generate_url())
     # indeed_page = requests.get(indeed_url_creator.generate_url())
+
     # Clear output.json file.
     open("output.json", 'w').close()
 

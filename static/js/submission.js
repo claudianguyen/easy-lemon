@@ -15,5 +15,18 @@ function submitJobSearch() {
 };
 
 function updateResults(response) {
-    $('#results').html(response);
+    let data = JSON.parse(response);
+    let jobResultsTable = $('#results tbody');
+    jobResultsTable.empty();
+    console.log(data);
+    for (var jobResultIndex = 0; jobResultIndex < data.length; jobResultIndex++) {
+        jobResult = data[jobResultIndex];
+        let jobResultRow = "<tr>";
+        jobResultRow += "<td>" + jobResult['job_title'] + "</td>";
+        jobResultRow += "<td>" + jobResult['job_company'] + "</td>";
+        jobResultRow += "<td>" + jobResult['job_exp'] + "</td>";
+        jobResultRow += "<td>" + "<a target=\"_blank\"" + "href=\"" + jobResult['job_url'] + "\">click here</a>" + "</td>";
+        jobResultRow += "</tr>";
+        jobResultsTable.append(jobResultRow)
+    }
 }
