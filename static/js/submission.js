@@ -18,7 +18,6 @@ function updateResults(response) {
     let data = JSON.parse(response);
     let jobResultsTable = $('#results tbody');
     jobResultsTable.empty();
-    console.log(data);
     for (var jobResultIndex = 0; jobResultIndex < data.length; jobResultIndex++) {
         jobResult = data[jobResultIndex];
         let jobResultRow = "<tr>";

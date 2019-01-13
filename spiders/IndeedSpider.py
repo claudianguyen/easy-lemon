@@ -69,6 +69,9 @@ class IndeedSpider(Spider):
         job_info['job_salary'] = \
             job_row.xpath('.//td[@class="snip"]/div/span[@class="no-wrap"]//text()').extract_first()
 
+        # Initial defaults.
+        job_info['job_points'] = "0"
+
         # Format job_info.
         FormatUtils.format_job_info(job_info)
         return job_info
@@ -87,6 +90,7 @@ class IndeedSpider(Spider):
             if exp and exp[0]:
                 # Must be a number since we parsed it.
                 job_info['job_exp'] = exp[0]
+                job_info['job_points'] = "1"
                 break
         FormatUtils.format_job_info(job_info)
         self.selected_jobs.append(job_info)

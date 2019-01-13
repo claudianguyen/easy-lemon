@@ -10,6 +10,7 @@ from url.IndeedUrlCreator import IndeedUrlCreator
 
 # External lib
 from flask import Flask, render_template, request
+import json
 # import pandas as pd
 # import time
 from scrapy import Spider
@@ -75,7 +76,9 @@ def execute_indeed_query(job_query):
 
     # Return results back to frontend.
     with open("output.json") as items_file:
-        return items_file.read()
+        job_results = json.load(items_file)
+        return json.dumps(
+            sorted([job_result for job_result in job_results], key=lambda result: result['job_points'], reverse=True))
 
 
 def build_job_query(job_title, job_location, job_salary=""):

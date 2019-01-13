@@ -18,4 +18,5 @@ class JobInfo(Item):
     job_company = Field()
     job_salary = Field()
     job_exp = Field()
+    job_points = Field()
     pass
