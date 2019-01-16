@@ -67,7 +67,7 @@ class IndeedSpider(Spider):
             urljoin(self.BASE_URL, job_row.xpath('.//a[@data-tn-element="jobTitle"]/@href').extract_first())
         # Parse salary information, if available.
         job_info['job_salary'] = \
-            job_row.xpath('.//td[@class="snip"]/div/span[@class="no-wrap"]//text()').extract_first()
+            job_row.xpath('.//div[@class="salarySnippet"]//span[@class="salary no-wrap"]//text()').extract_first()
 
         # Initial defaults.
         job_info['job_points'] = "0"

@@ -2,6 +2,8 @@ function submitJobSearch() {
     let jobTitle = $('input[name=job-title]').val();
     let jobLocation = $('input[name=job-location]').val();
     let jobSalary = $('input[name=job-salary]').val();
+    $('.submit-button').prop('disabled', true);
+    $('.submit-button').val("Loading...");
     $.ajax({
         url: '/job_search',
         method: 'POST',
@@ -21,11 +23,16 @@ function updateResults(response) {
     for (var jobResultIndex = 0; jobResultIndex < data.length; jobResultIndex++) {
         jobResult = data[jobResultIndex];
         let jobResultRow = "<tr>";
-        jobResultRow += "<td>" + jobResult['job_title'] + "</td>";
+        jobResultRow += "<td>" + "<a target=\"_blank\"" + "href=\""
+            + jobResult['job_url'] + "\">" + jobResult['job_title'] + "</a></td>";
         jobResultRow += "<td>" + jobResult['job_company'] + "</td>";
         jobResultRow += "<td>" + jobResult['job_exp'] + "</td>";
-        jobResultRow += "<td>" + "<a target=\"_blank\"" + "href=\"" + jobResult['job_url'] + "\">click here</a>" + "</td>";
+        jobResultRow += "<td>" + jobResult['job_salary'] + "</td>";
         jobResultRow += "</tr>";
         jobResultsTable.append(jobResultRow)
     }
+    $('.submit-button').prop('disabled', false);
+    $('.submit-button').val("Submit");
+
+
 }
