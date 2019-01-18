@@ -18,3 +18,13 @@ def format_job_info(job_info):
             job_info[charc] = "N/A"
 
     return job_info
+
+
+def currency_string_to_basic_string(currency_string):
+    """
+    Given a string like $120,000 --> 120000
+    :param currency_string: The currency string to convert
+    :return: String that represents the "basic" version of the string.
+    """
+    currency_excludes = str.maketrans('$', ' ', ',')
+    return currency_string.translate(currency_excludes)

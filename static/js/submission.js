@@ -1,3 +1,7 @@
+/**
+* Methods related to the submission of a jobSearch query.
+*/
+
 function submitJobSearch() {
     let jobTitle = $('input[name=job-title]').val();
     let jobLocation = $('input[name=job-location]').val();
@@ -9,7 +13,8 @@ function submitJobSearch() {
         method: 'POST',
         contentType: 'application/json;charset=UTF-8',
         data: JSON.stringify({jobTitle: jobTitle, jobLocation: jobLocation, jobSalary: jobSalary}),
-        success: updateResults
+        success: updateResults,
+        error: handleError
 
     });
 
@@ -33,6 +38,9 @@ function updateResults(response) {
     }
     $('.submit-button').prop('disabled', false);
     $('.submit-button').val("Submit");
+}
 
-
+function handleError() {
+    $('.submit-button').prop('disabled', false);
+    alert("An error occurred. Please try again.");
 }
