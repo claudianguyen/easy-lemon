@@ -141,7 +141,7 @@ def compute_salary_points(salary, job_query):
             salary_range[0] = FormatUtils.currency_string_to_basic_string(salary_range[0])
             # Second number represents range, may have additional characters after it. We should remove these.
             salary_range[1].split()
-            salary_number_high = FormatUtils.currency_string_to_basic_string(salary_range[1][0].strip())
+            salary_number_high = int(FormatUtils.currency_string_to_basic_string(salary_range[1][0].strip()))
             salary_number_low = int(salary_range[0])
             return 1 \
                 if (salary_number_low and salary_number_low > desired_salary or salary_number_high > desired_salary) \

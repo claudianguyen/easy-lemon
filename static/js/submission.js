@@ -42,5 +42,6 @@ function updateResults(response) {
 
 function handleError() {
     $('.submit-button').prop('disabled', false);
+    $('.submit-button').val("Submit");
     alert("An error occurred. Please try again.");
 }
