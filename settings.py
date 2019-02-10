@@ -9,14 +9,14 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'lemon_peeler'
+BOT_NAME = 'easy-lemon'
 
-SPIDER_MODULES = ['lemon_peeler.spiders']
-NEWSPIDER_MODULE = 'lemon_peeler.spiders'
+SPIDER_MODULES = ['spiders']
+NEWSPIDER_MODULE = 'spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'lemon_peeler (+http://www.yourdomain.com)'
+#USER_AGENT = 'easy-lemon (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -47,13 +47,13 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'lemon_peeler.middlewares.LemonPeelerSpiderMiddleware': 543,
+#    'middlewares.EasyLemonSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'lemon_peeler.middlewares.LemonPeelerDownloaderMiddleware': 543,
+#    'middlewares.EasyLemonDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -65,7 +65,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'lemon_peeler.pipelines.LemonPeelerPipeline': 300,
+#    'pipelines.EasyLemonPipeline': 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)

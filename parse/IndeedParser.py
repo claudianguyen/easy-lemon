@@ -1,8 +1,9 @@
-from entities.JobInfo import JobInfo
 from parse.BaseParser import BaseParser
 
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
+
+from items import JobInfo
 
 
 class IndeedParser(BaseParser):
@@ -37,19 +38,19 @@ class IndeedParser(BaseParser):
         :param job_row: a row from the job results page.
         :return: jobInfo
         """
+        job_info = JobInfo()
         # Parse company name.
-        company = job_row.find(name="span", attrs={"class", "company"}).text.strip()
+        job_info['job_company'] = job_row.find(name="span", attrs={"class", "company"}).text.strip()
         # Parse listed location from result.
-        location = job_row.find(name="span", attrs={"class", "location"}).text.strip()
+        job_info['job_location'] = job_row.find(name="span", attrs={"class", "location"}).text.strip()
         # Grad the element containing the job title and job url.
         title_and_url = job_row.find(name="a", attrs={"data-tn-element": "jobTitle"})
         # Since Indeed's urls are relative urls, we need to join them with the domain to acquire the absolute url.
-        url = urljoin(self.BASE_URL, title_and_url.attrs['href'])
-        title = title_and_url.text.strip()
+        job_info['job_url'] = urljoin(self.BASE_URL, title_and_url.attrs['href'])
+        job_info['job_title'] = title_and_url.text.strip()
         snippet = job_row.find(name="td", attrs={"class", "snip"})
         salary_element = snippet.find(name="span", attrs={"class", "no-wrap"})
-        salary = salary_element.text.strip() if salary_element else "N/A"
-        job_info = JobInfo(title, location, url, company, salary)
+        job_info['job_salary'] = salary_element.text.strip() if salary_element else "N/A"
         print(job_info)
         return job_info
 

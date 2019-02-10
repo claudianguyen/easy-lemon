@@ -1,9 +1,5 @@
-import requests
-import bs4
-from bs4 import BeautifulSoup
-import urllib.parse
+from items import JobInfo
 
-from entities.JobInfo import JobInfo
 
 class BaseParser:
     """ Represents a parser. Want to parse each result. """
@@ -26,7 +22,13 @@ class BaseParser:
         Entry point for the parsing of the job information for our job search.
         :return:
         """
-        self.job_results.append(JobInfo("Title", "Location", "Company", "URL", "Salary"))
+        job_info = JobInfo()
+        job_info['job_title'] = "Title"
+        job_info['job_location'] = "Location"
+        job_info['job_url'] = "URL"
+        job_info['job_company'] = "Company"
+        job_info['job_salary'] = "Salary"
+        self.job_results.append(job_info)
 
     def get_num_results(self):
         """
