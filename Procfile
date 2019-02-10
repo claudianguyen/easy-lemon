@@ -1,1 +1,1 @@
-web: python easy-lemon.py runserver 0.0.0.0:$PORT
+web: gunicorn -w 4 easy-lemon:app
