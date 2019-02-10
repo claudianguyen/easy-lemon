@@ -1,1 +1,1 @@
-web: python easy-lemon.py
+worker: python easy-lemon.py
