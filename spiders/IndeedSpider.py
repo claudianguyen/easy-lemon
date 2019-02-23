@@ -87,8 +87,11 @@ class IndeedSpider(Spider):
 
         job_info = response.meta.get('job_info')
         # Update url to be the company website.
-        job_info['job_url'] = response.xpath('.//a[contains(text(), \"' + indeed_apply_now_text + '\")]/@href')\
+        direct_url = response.xpath('.//a[contains(text(), \"' + indeed_apply_now_text + '\")]/@href')\
             .extract_first()
+        # Update url if direct link to job application exists.
+        if direct_url is not None:
+            job_info['job_url'] = direct_url
         job_info['job_exp'] = ''
         job_bullets = response.xpath('//li').extract()
         for bullet in job_bullets:
