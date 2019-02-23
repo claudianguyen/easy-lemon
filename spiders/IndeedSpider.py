@@ -82,7 +82,13 @@ class IndeedSpider(Spider):
         The job_info will be passed in via the response's meta tag.
         :return:
         """
+        # Text for the "Apply Now" button that links the user to the application site.
+        indeed_apply_now_text = "Apply Now"
+
         job_info = response.meta.get('job_info')
+        # Update url to be the company website.
+        job_info['job_url'] = response.xpath('.//a[contains(text(), \"' + indeed_apply_now_text + '\")]/@href')\
+            .extract_first()
         job_info['job_exp'] = ''
         job_bullets = response.xpath('//li').extract()
         for bullet in job_bullets:

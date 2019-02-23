@@ -61,9 +61,6 @@ def execute_indeed_query(job_query):
     # print("Creating Indeed url: " + indeed_url_creator.generate_url())
     # indeed_page = requests.get(indeed_url_creator.generate_url())
 
-    # Clear output.json file.
-    open("output.json", 'w').close()
-
     subprocess.check_output([
         'scrapy',
         'crawl',
@@ -79,6 +76,10 @@ def execute_indeed_query(job_query):
     with open("output.json", "r+") as items_file:
         for job_result in items_file:
             job_results.append(json.loads(job_result))
+        items_file.close()
+        # Clear output.json file.
+        open("output.json", 'w').close()
+
         return json.dumps(
             sorted(
                 job_results,
