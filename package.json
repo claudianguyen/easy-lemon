@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/claudianguyen/easy-lemon/issues"
   },
-  "homepage": "https://github.com/claudianguyen/easy-lemon#readme"
+  "homepage": "https://github.com/claudianguyen/easy-lemon#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2"
+  }
 }
