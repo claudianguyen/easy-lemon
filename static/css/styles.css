@@ -1,0 +1,38 @@
+.submit-button {
+	border-radius: 50px;
+	border: 3px solid #24b662;
+	color: #fff; /*text color */
+	overflow: hidden;
+	background: #24b662;
+	cursor: pointer;
+	padding: 6px 55px;
+	display: inline-block;
+	margin: 5px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 700;
+	outline: none;
+	position: relative;
+}
+
+.submit-button:hover {
+	color: black;
+	background: #fff;
+}
+
+.label {
+	color: black; /*text color */
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 700;
+}
+
+.texbox {
+ 	border:2px solid #24b662;
+ 	margin-top: 5px;
+ 	margin-bottom: 15px;
+}
+
+
+
+
