@@ -5,20 +5,28 @@
     <title>Easy Lemon</title>
     <script src="{{url_for('static', filename='js/submission.js')}}"></script>
     <script src="{{url_for('static', filename='js/lib/jquery-3.3.1.min.js')}}"></script>
+    <link rel="stylesheet" href="../static/css/styles.css">
+
 </head>
 <body>
 <h1>Welcome to easy lemon!</h1>
 <div>
 <form>
-  Job Title/keywords:<br>
-  <input type="text" name="job-title" value="software engineer">
-  <br>
-  Location:<br>
-  <input type="text" name="job-location" value="san mateo">
-  <br>
-  Salary:<br>
-  <input type="text" name="job-salary" value="120000">
-  <br><br>
+  <label for="jobtitle" >
+    <span class="label">Job Title</span></br>
+    <input type="text" class="texbox" id="jobtitle" value="software engineer">
+  </label>
+  </br>
+  <label for="joblocation" >
+    <span class="label">Location</span></br>
+    <input type="text" class="texbox" id="joblocation" value="San Mateo">
+  </label>
+  </br>
+  <label for="jobsalary" >
+    <span class="label">Desired Salary</span></br>
+    <input type="text" class="texbox" id="jobsalary" value="100000">
+  </label>
+  </br>
   <input type="button" class="submit-button" value="Submit" onclick="submitJobSearch()">
 </form>
 
