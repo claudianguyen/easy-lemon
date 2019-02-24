@@ -185,6 +185,103 @@ process.chdir = function (dir) {
 process.umask = function() { return 0; };
 
 },{}],2:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactDom = _interopRequireDefault(require("react-dom"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var SearchComponent =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(SearchComponent, _React$Component);
+
+  function SearchComponent(props) {
+    var _this;
+
+    _classCallCheck(this, SearchComponent);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchComponent).call(this, props));
+    _this.state = {
+      liked: false
+    };
+    return _this;
+  }
+
+  _createClass(SearchComponent, [{
+    key: "render",
+    value: function render() {
+      if (this.state.liked) {
+        return 'You liked this.';
+      }
+
+      return _react.default.createElement("button", {
+        onClick: function onClick() {
+          alert("Hola, Cloud!!!!!");
+        }
+      }, " ", this.props.name);
+    }
+  }]);
+
+  return SearchComponent;
+}(_react.default.Component); // Props
+
+
+SearchComponent.propTypes = {
+  name: _propTypes.default.string.isRequired
+};
+var _default = SearchComponent;
+exports.default = _default;
+
+},{"prop-types":8,"react":18,"react-dom":12}],3:[function(require,module,exports){
+"use strict";
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _reactDom = _interopRequireDefault(require("react-dom"));
+
+var _SearchComponent = _interopRequireDefault(require("./components/SearchComponent.jsx"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+$(document).ready(function () {
+  var searchComponent = document.getElementById("SearchComponent");
+
+  _reactDom.default.render(_react.default.createElement(_SearchComponent.default, {
+    name: "React Button?"
+  }), searchComponent);
+});
+
+},{"./components/SearchComponent.jsx":2,"react":18,"react-dom":12}],4:[function(require,module,exports){
 /*
 object-assign
 (c) Sindre Sorhus
@@ -276,7 +373,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],3:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -382,7 +479,7 @@ checkPropTypes.resetWarningCache = function() {
 module.exports = checkPropTypes;
 
 }).call(this,require('_process'))
-},{"./lib/ReactPropTypesSecret":7,"_process":1}],4:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":9,"_process":1}],6:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -448,7 +545,7 @@ module.exports = function() {
   return ReactPropTypes;
 };
 
-},{"./lib/ReactPropTypesSecret":7}],5:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":9}],7:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -1043,7 +1140,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 };
 
 }).call(this,require('_process'))
-},{"./checkPropTypes":3,"./lib/ReactPropTypesSecret":7,"_process":1,"object-assign":2,"react-is":13}],6:[function(require,module,exports){
+},{"./checkPropTypes":5,"./lib/ReactPropTypesSecret":9,"_process":1,"object-assign":4,"react-is":15}],8:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -1066,7 +1163,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./factoryWithThrowingShims":4,"./factoryWithTypeCheckers":5,"_process":1,"react-is":13}],7:[function(require,module,exports){
+},{"./factoryWithThrowingShims":6,"./factoryWithTypeCheckers":7,"_process":1,"react-is":15}],9:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -1080,7 +1177,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 (function (process){
 /** @license React v16.8.3
  * react-dom.development.js
@@ -22158,7 +22255,7 @@ module.exports = reactDom;
 }
 
 }).call(this,require('_process'))
-},{"_process":1,"object-assign":2,"prop-types/checkPropTypes":3,"react":16,"scheduler":21,"scheduler/tracing":22}],9:[function(require,module,exports){
+},{"_process":1,"object-assign":4,"prop-types/checkPropTypes":5,"react":18,"scheduler":23,"scheduler/tracing":24}],11:[function(require,module,exports){
 /** @license React v16.8.3
  * react-dom.production.min.js
  *
@@ -22429,7 +22526,7 @@ x("38"):void 0;return Si(a,b,c,!1,d)},unmountComponentAtNode:function(a){Qi(a)?v
 X;X=!0;try{ki(a)}finally{(X=b)||W||Yh(1073741823,!1)}},__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{Events:[Ia,Ja,Ka,Ba.injectEventPluginsByName,pa,Qa,function(a){ya(a,Pa)},Eb,Fb,Dd,Da]}};function Ui(a,b){Qi(a)?void 0:x("299","unstable_createRoot");return new Pi(a,!0,null!=b&&!0===b.hydrate)}
 (function(a){var b=a.findFiberByHostInstance;return Te(n({},a,{overrideProps:null,currentDispatcherRef:Tb.ReactCurrentDispatcher,findHostInstanceByFiber:function(a){a=hd(a);return null===a?null:a.stateNode},findFiberByHostInstance:function(a){return b?b(a):null}}))})({findFiberByHostInstance:Ha,bundleType:0,version:"16.8.3",rendererPackageName:"react-dom"});var Wi={default:Vi},Xi=Wi&&Vi||Wi;module.exports=Xi.default||Xi;
 
-},{"object-assign":2,"react":16,"scheduler":21}],10:[function(require,module,exports){
+},{"object-assign":4,"react":18,"scheduler":23}],12:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -22471,7 +22568,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/react-dom.development.js":8,"./cjs/react-dom.production.min.js":9,"_process":1}],11:[function(require,module,exports){
+},{"./cjs/react-dom.development.js":10,"./cjs/react-dom.production.min.js":11,"_process":1}],13:[function(require,module,exports){
 (function (process){
 /** @license React v16.8.3
  * react-is.development.js
@@ -22702,7 +22799,7 @@ exports.isSuspense = isSuspense;
 }
 
 }).call(this,require('_process'))
-},{"_process":1}],12:[function(require,module,exports){
+},{"_process":1}],14:[function(require,module,exports){
 /** @license React v16.8.3
  * react-is.production.min.js
  *
@@ -22719,7 +22816,7 @@ exports.Fragment=e;exports.Lazy=r;exports.Memo=q;exports.Portal=d;exports.Profil
 exports.isContextProvider=function(a){return t(a)===h};exports.isElement=function(a){return"object"===typeof a&&null!==a&&a.$$typeof===c};exports.isForwardRef=function(a){return t(a)===n};exports.isFragment=function(a){return t(a)===e};exports.isLazy=function(a){return t(a)===r};exports.isMemo=function(a){return t(a)===q};exports.isPortal=function(a){return t(a)===d};exports.isProfiler=function(a){return t(a)===g};exports.isStrictMode=function(a){return t(a)===f};
 exports.isSuspense=function(a){return t(a)===p};
 
-},{}],13:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -22730,7 +22827,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/react-is.development.js":11,"./cjs/react-is.production.min.js":12,"_process":1}],14:[function(require,module,exports){
+},{"./cjs/react-is.development.js":13,"./cjs/react-is.production.min.js":14,"_process":1}],16:[function(require,module,exports){
 (function (process){
 /** @license React v16.8.3
  * react.development.js
@@ -24635,7 +24732,7 @@ module.exports = react;
 }
 
 }).call(this,require('_process'))
-},{"_process":1,"object-assign":2,"prop-types/checkPropTypes":3}],15:[function(require,module,exports){
+},{"_process":1,"object-assign":4,"prop-types/checkPropTypes":5}],17:[function(require,module,exports){
 /** @license React v16.8.3
  * react.production.min.js
  *
@@ -24662,7 +24759,7 @@ b,d){return W().useImperativeHandle(a,b,d)},useDebugValue:function(){},useLayout
 b){void 0!==b.ref&&(h=b.ref,f=J.current);void 0!==b.key&&(g=""+b.key);var l=void 0;a.type&&a.type.defaultProps&&(l=a.type.defaultProps);for(c in b)K.call(b,c)&&!L.hasOwnProperty(c)&&(e[c]=void 0===b[c]&&void 0!==l?l[c]:b[c])}c=arguments.length-2;if(1===c)e.children=d;else if(1<c){l=Array(c);for(var m=0;m<c;m++)l[m]=arguments[m+2];e.children=l}return{$$typeof:p,type:a.type,key:g,ref:h,props:e,_owner:f}},createFactory:function(a){var b=M.bind(null,a);b.type=a;return b},isValidElement:N,version:"16.8.3",
 unstable_ConcurrentMode:x,unstable_Profiler:u,__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{ReactCurrentDispatcher:I,ReactCurrentOwner:J,assign:k}},Y={default:X},Z=Y&&X||Y;module.exports=Z.default||Z;
 
-},{"object-assign":2}],16:[function(require,module,exports){
+},{"object-assign":4}],18:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -24673,7 +24770,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/react.development.js":14,"./cjs/react.production.min.js":15,"_process":1}],17:[function(require,module,exports){
+},{"./cjs/react.development.js":16,"./cjs/react.production.min.js":17,"_process":1}],19:[function(require,module,exports){
 (function (process){
 /** @license React v0.13.3
  * scheduler-tracing.development.js
@@ -25100,7 +25197,7 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 }
 
 }).call(this,require('_process'))
-},{"_process":1}],18:[function(require,module,exports){
+},{"_process":1}],20:[function(require,module,exports){
 /** @license React v0.13.3
  * scheduler-tracing.production.min.js
  *
@@ -25112,7 +25209,7 @@ exports.unstable_unsubscribe = unstable_unsubscribe;
 
 'use strict';Object.defineProperty(exports,"__esModule",{value:!0});var b=0;exports.__interactionsRef=null;exports.__subscriberRef=null;exports.unstable_clear=function(a){return a()};exports.unstable_getCurrent=function(){return null};exports.unstable_getThreadID=function(){return++b};exports.unstable_trace=function(a,d,c){return c()};exports.unstable_wrap=function(a){return a};exports.unstable_subscribe=function(){};exports.unstable_unsubscribe=function(){};
 
-},{}],19:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 (function (process,global){
 /** @license React v0.13.3
  * scheduler.development.js
@@ -25815,7 +25912,7 @@ exports.unstable_getFirstCallbackNode = unstable_getFirstCallbackNode;
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":1}],20:[function(require,module,exports){
+},{"_process":1}],22:[function(require,module,exports){
 (function (global){
 /** @license React v0.13.3
  * scheduler.production.min.js
@@ -25840,7 +25937,7 @@ b=c.previous;b.next=c.previous=a;a.next=c;a.previous=b}return a};exports.unstabl
 exports.unstable_shouldYield=function(){return!e&&(null!==d&&d.expirationTime<l||w())};exports.unstable_continueExecution=function(){null!==d&&p()};exports.unstable_pauseExecution=function(){};exports.unstable_getFirstCallbackNode=function(){return d};
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],21:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -25851,7 +25948,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/scheduler.development.js":19,"./cjs/scheduler.production.min.js":20,"_process":1}],22:[function(require,module,exports){
+},{"./cjs/scheduler.development.js":21,"./cjs/scheduler.production.min.js":22,"_process":1}],24:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -25862,172 +25959,4 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/scheduler-tracing.development.js":17,"./cjs/scheduler-tracing.production.min.js":18,"_process":1}],23:[function(require,module,exports){
-"use strict";
-
-function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _reactDom = _interopRequireDefault(require("react-dom"));
-
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    default: obj
-  };
-}
-
-function _typeof(obj) {
-  if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
-    _typeof = function _typeof(obj) {
-      return _typeof2(obj);
-    };
-  } else {
-    _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
-    };
-  }
-
-  return _typeof(obj);
-}
-
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
-
-function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof(call) === "object" || typeof call === "function")) {
-    return call;
-  }
-
-  return _assertThisInitialized(self);
-}
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
-function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  return _getPrototypeOf(o);
-}
-
-function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function");
-  }
-
-  subClass.prototype = Object.create(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      writable: true,
-      configurable: true
-    }
-  });
-  if (superClass) _setPrototypeOf(subClass, superClass);
-}
-
-function _setPrototypeOf(o, p) {
-  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
-    o.__proto__ = p;
-    return o;
-  };
-
-  return _setPrototypeOf(o, p);
-}
-
-var SearchComponent =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(SearchComponent, _React$Component);
-
-  function SearchComponent(props) {
-    var _this;
-
-    _classCallCheck(this, SearchComponent);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchComponent).call(this, props));
-    _this.state = {
-      liked: false
-    };
-    return _this;
-  }
-
-  _createClass(SearchComponent, [{
-    key: "render",
-    value: function render() {
-      if (this.state.liked) {
-        return 'You liked this.';
-      }
-
-      return _react.default.createElement("button", {
-        onClick: function onClick() {
-          alert("Hola, Cloud!!");
-        }
-      }, " ", this.props.name);
-    }
-  }]);
-
-  return SearchComponent;
-}(_react.default.Component); // Props
-
-
-SearchComponent.propTypes = {
-  name: _propTypes.default.string.isRequired
-};
-var _default = SearchComponent;
-exports.default = _default;
-
-},{"prop-types":6,"react":16,"react-dom":10}],24:[function(require,module,exports){
-"use strict";
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _reactDom = _interopRequireDefault(require("react-dom"));
-
-var _SearchComponent = _interopRequireDefault(require("./SearchComponent"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
-
-$(document).ready(function () {
-  var searchComponent = document.getElementById("SearchComponent");
-
-  _reactDom.default.render(_react.default.createElement(_SearchComponent.default, {
-    name: "React Button?"
-  }), searchComponent);
-});
-
-},{"./SearchComponent":23,"react":16,"react-dom":10}]},{},[24]);
+},{"./cjs/scheduler-tracing.development.js":19,"./cjs/scheduler-tracing.production.min.js":20,"_process":1}]},{},[3]);
