@@ -9,7 +9,6 @@ from url.IndeedUrlCreator import IndeedUrlCreator
 from utils import FormatUtils
 
 
-
 # External lib
 from flask import Flask, render_template, request
 import json

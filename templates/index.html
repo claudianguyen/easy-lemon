@@ -1,10 +1,14 @@
+<!-- templates/index.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Easy Lemon</title>
-    <script src="{{url_for('static', filename='js/submission.js')}}"></script>
     <script src="{{url_for('static', filename='js/lib/jquery-3.3.1.min.js')}}"></script>
+    <!--<script src="{{url_for('static', filename='js/submission.js')}}"></script>-->
+    <script src="{{url_for('static', filename='js/bundle.js')}}"></script>
+    <!--<script src="{{url_for('static', filename='js/index.jsx')}}"></script>-->
 </head>
 <body>
 <h1>Welcome to easy lemon!</h1>
@@ -21,6 +25,7 @@
   <br><br>
   <input type="button" class="submit-button" value="Submit" onclick="submitJobSearch()">
 </form>
+<div id="SearchComponent"></div>
 
 <table id="results">
     <thead>

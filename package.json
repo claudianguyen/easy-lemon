@@ -4,7 +4,8 @@
   "description": "When life gives you lemons...",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx babel frontend/jsx --out-dir static/js && browserify static/js/index.js > static/js/bundle.js -t [ babelify ]"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,19 @@
   },
   "homepage": "https://github.com/claudianguyen/easy-lemon#readme",
   "dependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-react-app": "^3.1.2"
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.3",
+    "@babel/plugin-proposal-class-properties": "^7.3.3",
+    "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "babel-preset-react": "^6.24.1",
+    "babelify": "^10.0.0",
+    "prop-types": "^15.7.2"
   }
 }
