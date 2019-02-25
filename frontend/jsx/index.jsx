@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
-import SearchComponent from './components/SearchComponent.jsx';
+import EasyLemon from './components/EasyLemon.jsx';
 
 $(document).ready(function() {
-	let searchComponent = document.getElementById("SearchComponent");
-	ReactDOM.render(<SearchComponent name={"React Button?"}/>, searchComponent);
+	let easyLemonApp = document.querySelector("#easy-lemon-app");
+	ReactDOM.render(<EasyLemon />, easyLemonApp);
 });

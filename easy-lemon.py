@@ -41,6 +41,10 @@ def execute():
     """
     # Core logic that does the actual searching/parsing.
 
+    # Handle empty request:
+    if not request.data:
+        return None
+
     # Extract user-provided inputs.
     job_title = request.json['jobTitle']
     job_location = request.json['jobLocation']

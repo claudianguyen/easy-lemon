@@ -10,39 +10,17 @@
     <script src="{{url_for('static', filename='js/bundle.js')}}"></script>
     <!--<script src="{{url_for('static', filename='js/index.jsx')}}"></script>-->
     <link rel="stylesheet" href="../static/css/styles.css">
-
 </head>
 <body>
-<h1>Welcome to easy lemon!</h1>
-<div>
-<form>
-  <label for="jobtitle" >
-    <span class="label">Job Title</span></br>
-    <input type="text" class="texbox" id="jobtitle" value="software engineer">
-  </label>
-  </br>
-  <label for="joblocation" >
-    <span class="label">Location</span></br>
-    <input type="text" class="texbox" id="joblocation" value="San Mateo">
-  </label>
-  </br>
-  <label for="jobsalary" >
-    <span class="label">Desired Salary</span></br>
-    <input type="text" class="texbox" id="jobsalary" value="100000">
-  </label>
-  </br>
-  <input type="button" class="submit-button" value="Submit" onclick="submitJobSearch()">
-</form>
-<div id="SearchComponent"></div>
+  <div id="easy-lemon-app"></div>
 
-<table id="results">
-    <thead>
-        <tr>
-            <th>Job Title</th><th>Job Company</th><th>Years of Experience</th><th>Job Salary</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-</table>
-</div>
+  <table id="results">
+      <thead>
+          <tr>
+              <th>Job Title</th><th>Job Company</th><th>Years of Experience</th><th>Job Salary</th>
+          </tr>
+      </thead>
+      <tbody></tbody>
+  </table>
 </body>
 </html>
