@@ -1,17 +1,17 @@
 """
 Class containing the job search parameters. This class contains user-defined parameters as well as the
-different filters required.
+different computation required.
 """
 
 
 class JobQuery:
 
-    def __init__(self, job_title, job_location, job_salary=None, filters=None):
+    def __init__(self, job_title, job_location, job_salary=None, keywords=None):
         self.job_query = \
             {"title": job_title,
              "location": job_location,
              "salary": job_salary,
-             "filters": filters}
+             "keywords": keywords}
 
     def get_job_title(self):
         """

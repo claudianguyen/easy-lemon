@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from computation.IndeedJobPointsProcessor import IndeedJobPointsProcessor
+
 # Define your item pipelines here
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
@@ -7,5 +9,12 @@
 
 
 class EasyLemonPipeline(object):
+    """
+    This part of the pipeline deals with computing the "job_points" for each parsed job_info.
+    """
     def process_item(self, item, spider):
+        indeed_points_processor = IndeedJobPointsProcessor()
+        item["job_points"] = 0
+        computed_points = indeed_points_processor.compute_exp_points(item["job_exp"], item["job_salary"])
+        item["job_points"] = computed_points
         return item
