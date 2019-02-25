@@ -104,8 +104,8 @@ class EasyLemon extends React.Component {
         <JobSearchComponent 
           handleJobSubmission={this.handleJobSubmission}
           handleJobQueryChange={this.handleJobQueryChange}
-        />    
-        <JobResultListComponent jobResultList={jobResults} />  
+        />
+        <JobResultListComponent jobResultList={this.state.jobResults} />
       </div>
     );
   }
