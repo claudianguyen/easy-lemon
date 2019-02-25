@@ -86,7 +86,7 @@ def execute_indeed_query(job_query):
         return json.dumps(
             sorted(
                 job_results,
-                key=lambda result: result["job_points"],
+                key=lambda result: result["jobPoints"],
                 reverse=True))
 
 

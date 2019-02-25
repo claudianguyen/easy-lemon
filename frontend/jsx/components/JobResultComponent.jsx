@@ -10,7 +10,6 @@ class JobResultComponent extends React.Component {
 
   render() {
     const jobResult = this.props.jobResult;
-    console.log(jobResult);
     return (
       <div className="job-results">
         <div className="job-result">
@@ -20,7 +19,7 @@ class JobResultComponent extends React.Component {
           <div>
             <p>
               <span className="job-company-text">{jobResult.jobCompany} </span>
-              <span className="job-experience-text">{jobResult.jobExperience}</span>
+              <span className="job-experience-text">{jobResult.jobExp}</span>
               <span className="job-salary-text">{jobResult.jobSalary}</span>
             </p>
           </div>
@@ -36,7 +35,7 @@ JobResultComponent.propTypes = {
     jobTitle: PropTypes.string,
     jobUrl: PropTypes.string,
     jobCompany: PropTypes.string,
-    jobExperience: PropTypes.string,
+    jobExp: PropTypes.string,
     jobSalary: PropTypes.string
   })
 };

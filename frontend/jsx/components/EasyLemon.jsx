@@ -13,12 +13,14 @@ class EasyLemon extends React.Component {
     this.state = {
       jobTitle: "Software Engineer",
       jobLocation: "San Mateo",
-      jobSalary: "120,000"
+      jobSalary: "120,000",
+      jobResults: []
     }
   
     // Bind event handlers:
     this.handleJobSubmission = this.handleJobSubmission.bind(this);
     this.handleJobQueryChange = this.handleJobQueryChange.bind(this);
+    this.updateResults = this.updateResults.bind(this);
   }
 
   /** 
@@ -38,7 +40,7 @@ class EasyLemon extends React.Component {
         success: this.updateResults,
         error: this.handleError
     });
-    console.log(this.state);
+    // console.log(this.state);
   }
 
   /**
@@ -46,19 +48,8 @@ class EasyLemon extends React.Component {
    */
   updateResults(response) {
     let data = JSON.parse(response);
-    let jobResultsTable = $('#results tbody');
-    jobResultsTable.empty();
-    for (var jobResultIndex = 0; jobResultIndex < data.length; jobResultIndex++) {
-        let jobResult = data[jobResultIndex];
-        let jobResultRow = "<tr>";
-        jobResultRow += "<td>" + "<a target=\"_blank\"" + "href=\""
-            + jobResult['job_url'] + "\">" + jobResult['job_title'] + "</a></td>";
-        jobResultRow += "<td>" + jobResult['job_company'] + "</td>";
-        jobResultRow += "<td>" + jobResult['job_exp'] + "</td>";
-        jobResultRow += "<td>" + jobResult['job_salary'] + "</td>";
-        jobResultRow += "</tr>";
-        jobResultsTable.append(jobResultRow)
-    }
+    this.setState({ jobResults: data});
+
     $('.job-search-submit-button').prop('disabled', false);
     $('.job-search-submit-button').val("Submit");
   }
@@ -89,15 +80,6 @@ class EasyLemon extends React.Component {
   }
 
   render() {
-      let jobResult = {
-      jobTitle: 'Full Stack Engineer - Full Time',
-      jobUrl: 'https://google.com',
-      jobCompany: 'Google',
-      jobExperience: '5 Years of Experience',
-      jobSalary: '100,000'
-    };
-    let jobResults = [jobResult];
-  
     return (
       <div className="easy-lemon-container">
         <h1 className="easy-lemon-header">Welcome to easy lemon!</h1>

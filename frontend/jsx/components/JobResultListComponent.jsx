@@ -10,13 +10,7 @@ class JobResultListComponent extends React.Component {
   }
 
   render() {
-
-
     const jobResults = this.props.jobResultList;
-    
-
-    console.log("In JobResultsListComponent, JobResult is: ");
-    console.log(jobResults);
     return (
       <div className="job-results-container">
         {

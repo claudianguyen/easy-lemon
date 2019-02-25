@@ -23,11 +23,11 @@ class BaseParser:
         :return:
         """
         job_info = JobInfo()
-        job_info['job_title'] = "Title"
-        job_info['job_location'] = "Location"
-        job_info['job_url'] = "URL"
-        job_info['job_company'] = "Company"
-        job_info['job_salary'] = "Salary"
+        job_info['jobTitle'] = "Title"
+        job_info['jobLocation'] = "Location"
+        job_info['jobUrl'] = "URL"
+        job_info['jobCompany'] = "Company"
+        job_info['jobSalary'] = "Salary"
         self.job_results.append(job_info)
 
     def get_num_results(self):
