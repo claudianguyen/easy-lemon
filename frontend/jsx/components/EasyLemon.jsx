@@ -34,8 +34,8 @@ class EasyLemon extends React.Component {
         method: 'POST',
         contentType: 'application/json;charset=UTF-8',
         data: JSON.stringify({jobTitle: jobTitle, jobLocation: jobLocation, jobSalary: jobSalary}),
-        success: updateResults,
-        error: handleError
+        success: this.updateResults,
+        error: this.handleError
     });
     console.log(this.state);
   }
@@ -79,9 +79,9 @@ class EasyLemon extends React.Component {
       case JobSearchComponent.jobTitle:
         this.setState({ jobTitle: e.target.value});
       case JobSearchComponent.jobLocation:
-        this.setState({ 'jobLocation': e.target.value})
+        this.setState({ jobLocation: e.target.value});
       case JobSearchComponent.jobSalary:
-        this.setState({ 'jobSalary': e.target.value})
+        this.setState({ jobSalary: e.target.value});
       default:
         return;
     }

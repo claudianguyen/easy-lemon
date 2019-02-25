@@ -11,8 +11,8 @@ class JobSearchComponent extends React.Component {
   render() {
     return (
       <div className="job-search-div">
-        <label htmlFor="job-title">
-          <span className="job-search-label">Job Title</span>
+        <div className="job-search-param-div">
+          <label htmlFor="job-title" className="job-search-label">Job Title</label>
           <br/>
           <input type="text" 
             className="job-search-input-box" 
@@ -20,10 +20,10 @@ class JobSearchComponent extends React.Component {
             defaultValue="software engineer" 
             onChange={(e) => this.props.handleJobQueryChange(e, JobSearchComponent.jobTitle)}
           />
-        </label>
+        </div>
         <br/>
-        <label htmlFor="job-location">
-          <span className="job-search-label">Location</span>
+        <div className="job-search-param-div">
+          <label htmlFor="job-location" className="job-search-label">Location</label>
           <br/>
           <input type="text" 
             className="job-search-input-box" 
@@ -31,18 +31,18 @@ class JobSearchComponent extends React.Component {
             defaultValue="San Mateo"
             onChange={(e) => this.props.handleJobQueryChange(e, JobSearchComponent.jobLocation)}
           />
-        </label>
+        </div>
         <br/>
-        <label htmlFor="job-salary">
-          <span className="job-search-label">Desired Salary</span>
+        <div className="job-search-param-div">
+          <label htmlFor="job-salary" className="job-search-label">Desired Salary</label>
           <br/>
-          <input type="text" 
+          <input type="number" 
             className="job-search-input-box" 
             id="job-salary" 
             defaultValue="100000" 
             onChange={(e) => this.props.handleJobQueryChange(e, JobSearchComponent.jobSalary)}
           />
-        </label>
+        </div>
         <br/>
         <input type="button" className="job-search-submit-button" value="Submit" onClick={this.props.handleJobSubmission} />
       </div>
