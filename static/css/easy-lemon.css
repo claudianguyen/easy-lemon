@@ -1,6 +1,10 @@
 
 h1.easy-lemon-header {
-    margin-left: 20%;
+    margin-left: 45%;
+}
+
+.easy-lemon-container {
+    padding: 30px;
 }
 
 .job-search-submit-button {
@@ -33,6 +37,7 @@ h1.easy-lemon-header {
     bottom: 0px;
     width: 18%;
     padding-top: 20px;
+    padding-left: 15%
 }
 
 .job-search-label {
@@ -40,6 +45,8 @@ h1.easy-lemon-header {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 700;
+    width: 90%;
+    box-sizing: border-box;
 }
 
 .job-search-input-box {
@@ -55,7 +62,16 @@ h1.easy-lemon-header {
 }
 
 .job-results-container {
-    margin-left: 20%;
+    margin-left: 45%;
+    width: 78%;
+}
+
+.job-result {
+    width: 50%;
+}
+
+.job-result:hover {
+    background-color: #ccc
 }
 
 

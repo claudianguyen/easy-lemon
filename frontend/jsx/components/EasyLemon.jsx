@@ -99,7 +99,7 @@ class EasyLemon extends React.Component {
     let jobResults = [jobResult];
   
     return (
-      <div>
+      <div className="easy-lemon-container">
         <h1 className="easy-lemon-header">Welcome to easy lemon!</h1>
         <JobSearchComponent 
           handleJobSubmission={this.handleJobSubmission}

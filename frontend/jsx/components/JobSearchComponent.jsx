@@ -8,6 +8,17 @@ class JobSearchComponent extends React.Component {
     super(props);    
   }
 
+  /**
+   * Only allow numbers and the comma.
+   * TODO: More robust handling.
+   */
+   allowOnlySalaryValues(e) {
+    let charCode = e.keyCode || e.which;
+    if ((charCode < 48 || e.charCode > 57) && charCode != 188) {
+      e.preventDefault();
+    }
+  }
+
   render() {
     return (
       <div className="job-search-div">
@@ -36,11 +47,12 @@ class JobSearchComponent extends React.Component {
         <div className="job-search-param-div">
           <label htmlFor="job-salary" className="job-search-label">Desired Salary</label>
           <br/>
-          <input type="number" 
+          <input type="text" 
             className="job-search-input-box" 
             id="job-salary" 
             defaultValue="100000" 
             onChange={(e) => this.props.handleJobQueryChange(e, JobSearchComponent.jobSalary)}
+            onKeyPress={this.allowOnlySalaryValues}
           />
         </div>
         <br/>
