@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "browserify frontend/jsx/index.jsx > static/bundles/bundle.js -t [ babelify ]"
+    "build": "browserify frontend/jsx/index.jsx > static/bundles/bundle.js -t [ babelify ]",
+    "watch": " watchify frontend/jsx/index.jsx -o static/bundles/bundle.js -v -t babelify"
   },
   "repository": {
     "type": "git",
@@ -20,11 +21,11 @@
   "homepage": "https://github.com/claudianguyen/easy-lemon#readme",
   "dependencies": {
     "jquery": "^3.3.1",
+    "prop-types": "^15.7.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.3",
     "@babel/plugin-proposal-class-properties": "^7.3.3",
     "@babel/plugin-transform-react-jsx": "^7.3.0",
@@ -34,6 +35,6 @@
     "babel-preset-react": "^6.24.1",
     "babelify": "^10.0.0",
     "browserify": "^16.2.3",
-    "prop-types": "^15.7.2"
+    "watchify": "^3.11.1"
   }
 }
