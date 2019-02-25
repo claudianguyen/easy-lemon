@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import SearchComponent from './SearchComponent.jsx';
+import JobSearchComponent from './JobSearchComponent.jsx';
 
 class EasyLemon extends React.Component {
 
@@ -49,7 +49,7 @@ class EasyLemon extends React.Component {
 
 
   render() {
-    return <SearchComponent handleJobSubmission={this.handleJobSubmission} />
+    return <JobSearchComponent handleJobSubmission={this.handleJobSubmission} />
   }
 }
 // Props

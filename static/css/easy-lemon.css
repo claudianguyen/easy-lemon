@@ -1,4 +1,4 @@
-.submit-button {
+.job-search-submit-button {
 	border-radius: 50px;
 	border: 3px solid #24b662;
 	color: #fff; /*text color */
@@ -15,19 +15,19 @@
 	position: relative;
 }
 
-.submit-button:hover {
+.job-search-submit-button:hover {
 	color: black;
 	background: #fff;
 }
 
-.label {
+.job-search-label {
 	color: black; /*text color */
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	font-weight: 700;
 }
 
-.texbox {
+.job-search-input-box {
  	border:2px solid #24b662;
  	margin-top: 5px;
  	margin-bottom: 15px;
