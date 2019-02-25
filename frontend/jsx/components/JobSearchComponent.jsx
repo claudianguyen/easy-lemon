@@ -10,36 +10,54 @@ class JobSearchComponent extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Welcome to easy lemon!</h1>
-        <div>
-          <label htmlFor="job-title" >
-            <span className="job-search-label">Job Title</span>
-            <br/>
-            <input type="text" className="job-search-input-box" id="job-title" value="software engineer" />
-          </label>
+      <div className="job-search-div">
+        <label htmlFor="job-title">
+          <span className="job-search-label">Job Title</span>
           <br/>
-          <label htmlFor="job-location" >
-            <span className="job-search-label">Location</span>
-            <br/>
-            <input type="text" className="job-search-input-box" id="job-location" value="San Mateo" />
-          </label>
+          <input type="text" 
+            className="job-search-input-box" 
+            id="job-title" 
+            defaultValue="software engineer" 
+            onChange={(e) => this.props.handleJobQueryChange(e, JobSearchComponent.jobTitle)}
+          />
+        </label>
+        <br/>
+        <label htmlFor="job-location">
+          <span className="job-search-label">Location</span>
           <br/>
-          <label htmlFor="job-salary" >
-            <span className="job-search-label">Desired Salary</span>
-            <br/>
-            <input type="text" className="job-search-input-box" id="job-salary" value="100000" />
-          </label>
+          <input type="text" 
+            className="job-search-input-box" 
+            id="job-location" 
+            defaultValue="San Mateo"
+            onChange={(e) => this.props.handleJobQueryChange(e, JobSearchComponent.jobLocation)}
+          />
+        </label>
+        <br/>
+        <label htmlFor="job-salary">
+          <span className="job-search-label">Desired Salary</span>
           <br/>
-          <input type="button" className="job-search-submit-button" value="Submit" onClick={this.props.handleJobSubmission} />
-        </div>
-      </div>      
+          <input type="text" 
+            className="job-search-input-box" 
+            id="job-salary" 
+            defaultValue="100000" 
+            onChange={(e) => this.props.handleJobQueryChange(e, JobSearchComponent.jobSalary)}
+          />
+        </label>
+        <br/>
+        <input type="button" className="job-search-submit-button" value="Submit" onClick={this.props.handleJobSubmission} />
+      </div>
     );
   }
 }
 // Props
 JobSearchComponent.propTypes = {
-  handleJobSubmission: PropTypes.func.isRequired
+  handleJobSubmission: PropTypes.func.isRequired,
+  handleJobQueryChange: PropTypes.func.isRequired
 };
+
+JobSearchComponent.jobTitle = "jobTitle";
+JobSearchComponent.jobSalary = "jobSalary";
+JobSearchComponent.jobLocation = "jobLocation";
+
 
 export default JobSearchComponent;

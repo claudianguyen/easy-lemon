@@ -44,26 +44,33 @@ function (_React$Component) {
 
     _classCallCheck(this, EasyLemon);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(EasyLemon).call(this, props)); // Bindings:
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(EasyLemon).call(this, props)); // Initialize state.
 
+    _this.state = {
+      jobTitle: "Software Engineer",
+      jobLocation: "San Mateo",
+      jobSalary: "120,000" // Bind event handlers:
+
+    };
     _this.updateResults = _this.updateResults.bind(_assertThisInitialized(_this));
     _this.handleError = _this.handleError.bind(_assertThisInitialized(_this));
     _this.handleJobSubmission = _this.handleJobSubmission.bind(_assertThisInitialized(_this));
+    _this.handleJobQueryChange = _this.handleJobQueryChange.bind(_assertThisInitialized(_this));
     return _this;
   }
   /** 
-  * Handles the submission for a job search. Creates the job_query for the backend.
-  */
+   * Handles the submission for a job search. Creates the job_query for the backend.
+   */
 
 
   _createClass(EasyLemon, [{
     key: "handleJobSubmission",
     value: function handleJobSubmission() {
-      var jobTitle = $('input[id=job-title]').val();
-      var jobLocation = $('input[id=job-location]').val();
-      var jobSalary = $('input[id=job-salary]').val();
-      $('.submit-button').prop('disabled', true);
-      $('.submit-button').val("Loading...");
+      var jobTitle = this.state.jobTitle;
+      var jobLocation = this.state.jobLocation;
+      var jobSalary = this.state.jobSalary;
+      $('.job-search-submit-button').prop('disabled', true);
+      $('.job-search-submit-button').val("Loading...");
       $.ajax({
         url: '/job_search',
         method: 'POST',
@@ -76,6 +83,7 @@ function (_React$Component) {
         success: this.updateResults,
         error: this.handleError
       });
+      console.log(this.state);
     }
     /**
      * Updates the page with results from the server. 
@@ -83,8 +91,24 @@ function (_React$Component) {
 
   }, {
     key: "updateResults",
-    value: function updateResults() {
-      console.log("Success");
+    value: function updateResults(response) {
+      var data = JSON.parse(response);
+      var jobResultsTable = $('#results tbody');
+      jobResultsTable.empty();
+
+      for (var jobResultIndex = 0; jobResultIndex < data.length; jobResultIndex++) {
+        var jobResult = data[jobResultIndex];
+        var jobResultRow = "<tr>";
+        jobResultRow += "<td>" + "<a target=\"_blank\"" + "href=\"" + jobResult['job_url'] + "\">" + jobResult['job_title'] + "</a></td>";
+        jobResultRow += "<td>" + jobResult['job_company'] + "</td>";
+        jobResultRow += "<td>" + jobResult['job_exp'] + "</td>";
+        jobResultRow += "<td>" + jobResult['job_salary'] + "</td>";
+        jobResultRow += "</tr>";
+        jobResultsTable.append(jobResultRow);
+      }
+
+      $('.job-search-submit-button').prop('disabled', false);
+      $('.job-search-submit-button').val("Submit");
     }
     /**
      * Handles any server errors.
@@ -93,14 +117,46 @@ function (_React$Component) {
   }, {
     key: "handleError",
     value: function handleError() {
-      console.log("Error");
+      $('.job-search-submit-button').prop('disabled', false);
+      $('.job-search-submit-button').val("Submit");
+      alert("An error occurred. Please try again.");
+    }
+    /**
+     * Handler for changes to the "Job Query" searchboxes.
+     */
+
+  }, {
+    key: "handleJobQueryChange",
+    value: function handleJobQueryChange(e, jobParam) {
+      switch (jobParam) {
+        case _JobSearchComponent.default.jobTitle:
+          this.setState({
+            jobTitle: e.target.value
+          });
+
+        case _JobSearchComponent.default.jobLocation:
+          this.setState({
+            'jobLocation': e.target.value
+          });
+
+        case _JobSearchComponent.default.jobSalary:
+          this.setState({
+            'jobSalary': e.target.value
+          });
+
+        default:
+          return;
+      }
     }
   }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement(_JobSearchComponent.default, {
-        handleJobSubmission: this.handleJobSubmission
-      });
+      return _react.default.createElement("div", null, _react.default.createElement("h1", {
+        className: "easy-lemon-header"
+      }, "Welcome to easy lemon!"), _react.default.createElement(_JobSearchComponent.default, {
+        handleJobSubmission: this.handleJobSubmission,
+        handleJobQueryChange: this.handleJobQueryChange
+      }));
     }
   }]);
 
@@ -160,7 +216,11 @@ function (_React$Component) {
   _createClass(JobSearchComponent, [{
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", null, _react.default.createElement("h1", null, "Welcome to easy lemon!"), _react.default.createElement("div", null, _react.default.createElement("label", {
+      var _this = this;
+
+      return _react.default.createElement("div", {
+        className: "job-search-div"
+      }, _react.default.createElement("label", {
         htmlFor: "job-title"
       }, _react.default.createElement("span", {
         className: "job-search-label"
@@ -168,7 +228,10 @@ function (_React$Component) {
         type: "text",
         className: "job-search-input-box",
         id: "job-title",
-        value: "software engineer"
+        defaultValue: "software engineer",
+        onChange: function onChange(e) {
+          return _this.props.handleJobQueryChange(e, JobSearchComponent.jobTitle);
+        }
       })), _react.default.createElement("br", null), _react.default.createElement("label", {
         htmlFor: "job-location"
       }, _react.default.createElement("span", {
@@ -177,7 +240,10 @@ function (_React$Component) {
         type: "text",
         className: "job-search-input-box",
         id: "job-location",
-        value: "San Mateo"
+        defaultValue: "San Mateo",
+        onChange: function onChange(e) {
+          return _this.props.handleJobQueryChange(e, JobSearchComponent.jobLocation);
+        }
       })), _react.default.createElement("br", null), _react.default.createElement("label", {
         htmlFor: "job-salary"
       }, _react.default.createElement("span", {
@@ -186,13 +252,16 @@ function (_React$Component) {
         type: "text",
         className: "job-search-input-box",
         id: "job-salary",
-        value: "100000"
+        defaultValue: "100000",
+        onChange: function onChange(e) {
+          return _this.props.handleJobQueryChange(e, JobSearchComponent.jobSalary);
+        }
       })), _react.default.createElement("br", null), _react.default.createElement("input", {
         type: "button",
         className: "job-search-submit-button",
         value: "Submit",
         onClick: this.props.handleJobSubmission
-      })));
+      }));
     }
   }]);
 
@@ -201,8 +270,12 @@ function (_React$Component) {
 
 
 JobSearchComponent.propTypes = {
-  handleJobSubmission: _propTypes.default.func.isRequired
+  handleJobSubmission: _propTypes.default.func.isRequired,
+  handleJobQueryChange: _propTypes.default.func.isRequired
 };
+JobSearchComponent.jobTitle = "jobTitle";
+JobSearchComponent.jobSalary = "jobSalary";
+JobSearchComponent.jobLocation = "jobLocation";
 var _default = JobSearchComponent;
 exports.default = _default;
 
