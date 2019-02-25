@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import JobSearchComponent from './JobSearchComponent.jsx';
+import JobResultListComponent from './JobResultListComponent.jsx';
 
 class EasyLemon extends React.Component {
 
@@ -76,7 +77,7 @@ class EasyLemon extends React.Component {
    */
   handleJobQueryChange(e, jobParam) {
     switch(jobParam) {
-      case JobSearchComponent.jobTitle:
+      case JobSearchComponent.JOB_TITLE:
         this.setState({ jobTitle: e.target.value});
       case JobSearchComponent.jobLocation:
         this.setState({ jobLocation: e.target.value});
@@ -88,13 +89,23 @@ class EasyLemon extends React.Component {
   }
 
   render() {
+      let jobResult = {
+      jobTitle: 'Full Stack Engineer - Full Time',
+      jobUrl: 'https://google.com',
+      jobCompany: 'Google',
+      jobExperience: '5 Years of Experience',
+      jobSalary: '100,000'
+    };
+    let jobResults = [jobResult];
+  
     return (
       <div>
         <h1 className="easy-lemon-header">Welcome to easy lemon!</h1>
         <JobSearchComponent 
           handleJobSubmission={this.handleJobSubmission}
           handleJobQueryChange={this.handleJobQueryChange}
-        />      
+        />    
+        <JobResultListComponent jobResultList={jobResults} />  
       </div>
     );
   }

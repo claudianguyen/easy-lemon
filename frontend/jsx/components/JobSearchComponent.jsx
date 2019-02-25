@@ -49,15 +49,16 @@ class JobSearchComponent extends React.Component {
     );
   }
 }
+
 // Props
 JobSearchComponent.propTypes = {
   handleJobSubmission: PropTypes.func.isRequired,
   handleJobQueryChange: PropTypes.func.isRequired
 };
 
-JobSearchComponent.jobTitle = "jobTitle";
-JobSearchComponent.jobSalary = "jobSalary";
-JobSearchComponent.jobLocation = "jobLocation";
+JobSearchComponent.JOB_TITLE = "jobTitle";
+JobSearchComponent.JOB_LOCATION = "jobLocation";
+JobSearchComponent.JOB_SALARY = "jobSalary";
 
 
 export default JobSearchComponent;
