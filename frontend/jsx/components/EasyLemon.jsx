@@ -16,8 +16,6 @@ class EasyLemon extends React.Component {
     }
   
     // Bind event handlers:
-    this.updateResults = this.updateResults.bind(this);
-    this.handleError = this.handleError.bind(this);
     this.handleJobSubmission = this.handleJobSubmission.bind(this);
     this.handleJobQueryChange = this.handleJobQueryChange.bind(this);
   }
@@ -36,8 +34,8 @@ class EasyLemon extends React.Component {
         method: 'POST',
         contentType: 'application/json;charset=UTF-8',
         data: JSON.stringify({jobTitle: jobTitle, jobLocation: jobLocation, jobSalary: jobSalary}),
-        success: this.updateResults,
-        error: this.handleError
+        success: updateResults,
+        error: handleError
     });
     console.log(this.state);
   }
