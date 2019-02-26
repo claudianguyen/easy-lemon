@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import JobSearchComponent from './JobSearchComponent.jsx';
 import JobResultListComponent from './JobResultListComponent.jsx';
+import Dialog from './Dialog.jsx';
 
 class EasyLemon extends React.Component {
 
@@ -15,40 +16,61 @@ class EasyLemon extends React.Component {
       jobLocation: "San Mateo",
       jobSalary: "120,000",
       jobExp: "1",
-      jobResults: []
+      jobResults: [],
+      showDialog: false,
+      submissionDialogText:""
     }
   
     // Bind event handlers:
+    this.handleCloseDialogButton = this.handleCloseDialogButton.bind(this);
     this.handleJobSubmission = this.handleJobSubmission.bind(this);
     this.handleJobQueryChange = this.handleJobQueryChange.bind(this);
     this.updateResults = this.updateResults.bind(this);
+    this.handleError = this.handleError.bind(this);
+    this.submitJobQuery = this.submitJobQuery.bind(this);
+  }
+
+  /**
+   * Handles the close button for the dialog.
+   */
+  handleCloseDialogButton() {
+    this.setState({ showDialog: false});
   }
 
   /** 
    * Handles the submission for a job search. Creates the job_query for the backend.
    */
   handleJobSubmission() {
+
+    $('.job-search-submit-button').prop('disabled', true);
+    $('.job-search-submit-button').val("Loading...");
+    this.setState({ submissionDialogText: Dialog.LOADING, showDialog: true }, this.submitJobQuery);
+  }
+
+  /**
+   * Handles the actual ajax request to submit the jobQuery to the backend.
+   */
+  submitJobQuery() {
     let jobTitle = this.state.jobTitle;
     let jobLocation = this.state.jobLocation;
     let jobSalary = this.state.jobSalary;
-    $('.job-search-submit-button').prop('disabled', true);
-    $('.job-search-submit-button').val("Loading...");
     $.ajax({
-        url: '/job_search',
-        method: 'POST',
-        contentType: 'application/json;charset=UTF-8',
-        data: JSON.stringify({jobTitle: jobTitle, jobLocation: jobLocation, jobSalary: jobSalary}),
-        success: this.updateResults,
-        error: this.handleError
+      url: '/job_search',
+      method: 'POST',
+      contentType: 'application/json;charset=UTF-8',
+      data: JSON.stringify({jobTitle: jobTitle, jobLocation: jobLocation, jobSalary: jobSalary}),
+      success: this.updateResults,
+      error: this.handleError
     });
-  }
+    // console.log(this.state);
+ }
 
   /**
    * Updates the page with results from the server. 
    */
   updateResults(response) {
     let data = JSON.parse(response);
-    this.setState({ jobResults: data});
+    this.setState({ jobResults: data, showDialog: false, submissionDialogText: ""});
 
     $('.job-search-submit-button').prop('disabled', false);
     $('.job-search-submit-button').val("Submit");
@@ -60,7 +82,8 @@ class EasyLemon extends React.Component {
   handleError() {
     $('.job-search-submit-button').prop('disabled', false);
     $('.job-search-submit-button').val("Submit");
-    alert("An error occurred. Please try again.");
+    // alert("An error occurred. Please try again.");
+    this.setState({ submissionDialogText: Dialog.ERROR });
   }
 
   /**
@@ -88,6 +111,11 @@ class EasyLemon extends React.Component {
   render() {
     return (
       <div className="easy-lemon-container">
+      <Dialog
+        showDialog={this.state.showDialog}
+        dialogText={this.state.submissionDialogText}
+        handleCloseDialogButton={this.handleCloseDialogButton}
+      />
         <h1 className="easy-lemon-header">Welcome to easy lemon!</h1>
         <JobSearchComponent 
           handleJobSubmission={this.handleJobSubmission}
@@ -98,6 +126,7 @@ class EasyLemon extends React.Component {
     );
   }
 }
+
 // Props
 EasyLemon.propTypes = {
 };
