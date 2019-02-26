@@ -14,6 +14,7 @@ class EasyLemon extends React.Component {
       jobTitle: "Software Engineer",
       jobLocation: "San Mateo",
       jobSalary: "120,000",
+      jobExp: "1",
       jobResults: []
     }
   
@@ -40,7 +41,6 @@ class EasyLemon extends React.Component {
         success: this.updateResults,
         error: this.handleError
     });
-    // console.log(this.state);
   }
 
   /**
@@ -70,10 +70,16 @@ class EasyLemon extends React.Component {
     switch(jobParam) {
       case JobSearchComponent.JOB_TITLE:
         this.setState({ jobTitle: e.target.value});
-      case JobSearchComponent.jobLocation:
+        break;
+      case JobSearchComponent.JOB_LOCATION:
         this.setState({ jobLocation: e.target.value});
-      case JobSearchComponent.jobSalary:
+        break;
+      case JobSearchComponent.JOB_SALARY:
         this.setState({ jobSalary: e.target.value});
+        break;
+      case JobSearchComponent.JOB_EXP:
+        this.setState({ jobExp: e.target.value});
+        break;
       default:
         return;
     }

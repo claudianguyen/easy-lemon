@@ -74,6 +74,7 @@ h1.easy-lemon-header {
     background-color: #ccc
 }
 
-
-
-
+.job-search-select {
+    border:2px solid #24b662;
+    margin-top: 5px;
+}
