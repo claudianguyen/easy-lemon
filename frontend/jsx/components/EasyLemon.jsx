@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import JobSearchComponent from './JobSearchComponent.jsx';
 import JobResultListComponent from './JobResultListComponent.jsx';
 import Dialog from './Dialog.jsx';
+import Header from './Header.jsx';
 
 class EasyLemon extends React.Component {
 
@@ -103,16 +104,17 @@ class EasyLemon extends React.Component {
   render() {
     return (
       <div className="easy-lemon-container">
+      <Header />
       <Dialog
         showDialog={this.state.showDialog}
         dialogText={this.state.submissionDialogText}
         handleCloseDialogButton={this.handleCloseDialogButton}
       />
-        <h1 className="easy-lemon-header">Welcome to easy lemon!</h1>
         <JobSearchComponent 
           handleJobSubmission={this.handleJobSubmission}
           handleJobQueryChange={this.handleJobQueryChange}
         />
+        <div />
         <JobResultListComponent jobResultList={this.state.jobResults} />
       </div>
     );

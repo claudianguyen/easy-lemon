@@ -11,7 +11,7 @@ class JobResultComponent extends React.Component {
   render() {
     const jobResult = this.props.jobResult;
     return (
-      <div className="job-results">
+      <div>
         <div className="job-result">
           <h4>
             <a className="job-title-text" target="_blank" href={jobResult.jobUrl}>{jobResult.jobTitle}</a>

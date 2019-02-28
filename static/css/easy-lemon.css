@@ -3,7 +3,7 @@ h1.easy-lemon-header {
 }
 
 .easy-lemon-container {
-    padding: 30px;
+    overflow-x: hidden;
 }
 
 .dialog-mask-backdrop {
@@ -63,18 +63,19 @@ h1.easy-lemon-header {
 }
 
 .job-search-submit-button:hover {
-    color: black;
-    background: #fff;
+    color: #fff;
+    background: #01380B;
+    border: 3px solid #01380B;
+
 }
 
 .job-search-div {
     position: fixed;
     border-right: 5px solid #24b662;
-    top: 0px;
-    bottom: 0px;
     width: 18%;
-    padding-top: 20px;
+    margin-top: 146px;
     padding-left: 15%
+
 }
 
 .job-search-label {
@@ -99,8 +100,8 @@ h1.easy-lemon-header {
 }
 
 .job-results-container {
-    margin-left: 45%;
     width: 78%;
+    transform: translateX(50%);
 }
 
 .job-result {
@@ -114,4 +115,16 @@ h1.easy-lemon-header {
 .job-search-select {
     border:2px solid #24b662;
     margin-top: 5px;
+}
+
+.top-header-div {
+    background: #24b662;
+    color: #fff;
+    width:100%;
+    padding: 30px 45px;
+    position: fixed;
+    top:0;
+    left:0;
+    transition: transform(50%, 3%);
+    z-index: 8;
 }
