@@ -41,9 +41,6 @@ class EasyLemon extends React.Component {
    * Handles the submission for a job search. Creates the job_query for the backend.
    */
   handleJobSubmission() {
-
-    $('.job-search-submit-button').prop('disabled', true);
-    $('.job-search-submit-button').val("Loading...");
     this.setState({ submissionDialogText: Dialog.LOADING, showDialog: true }, this.submitJobQuery);
   }
 
@@ -71,17 +68,12 @@ class EasyLemon extends React.Component {
   updateResults(response) {
     let data = JSON.parse(response);
     this.setState({ jobResults: data, showDialog: false, submissionDialogText: ""});
-
-    $('.job-search-submit-button').prop('disabled', false);
-    $('.job-search-submit-button').val("Submit");
   }
 
   /**
    * Handles any server errors.
    */
   handleError() {
-    $('.job-search-submit-button').prop('disabled', false);
-    $('.job-search-submit-button').val("Submit");
     // alert("An error occurred. Please try again.");
     this.setState({ submissionDialogText: Dialog.ERROR });
   }
