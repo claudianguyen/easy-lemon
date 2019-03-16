@@ -40,17 +40,17 @@ class IndeedParser(BaseParser):
         """
         job_info = JobInfo()
         # Parse company name.
-        job_info['job_company'] = job_row.find(name="span", attrs={"class", "company"}).text.strip()
+        job_info['jobCompany'] = job_row.find(name="span", attrs={"class", "company"}).text.strip()
         # Parse listed location from result.
-        job_info['job_location'] = job_row.find(name="span", attrs={"class", "location"}).text.strip()
+        job_info['jobLocation'] = job_row.find(name="span", attrs={"class", "location"}).text.strip()
         # Grad the element containing the job title and job url.
         title_and_url = job_row.find(name="a", attrs={"data-tn-element": "jobTitle"})
         # Since Indeed's urls are relative urls, we need to join them with the domain to acquire the absolute url.
-        job_info['job_url'] = urljoin(self.BASE_URL, title_and_url.attrs['href'])
-        job_info['job_title'] = title_and_url.text.strip()
+        job_info['jobUrl'] = urljoin(self.BASE_URL, title_and_url.attrs['href'])
+        job_info['jobTitle'] = title_and_url.text.strip()
         snippet = job_row.find(name="td", attrs={"class", "snip"})
         salary_element = snippet.find(name="span", attrs={"class", "no-wrap"})
-        job_info['job_salary'] = salary_element.text.strip() if salary_element else "N/A"
+        job_info['jobSalary'] = salary_element.text.strip() if salary_element else "N/A"
         print(job_info)
         return job_info
 

@@ -1,35 +1,14 @@
+<!-- templates/index.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Easy Lemon</title>
-    <script src="{{url_for('static', filename='js/submission.js')}}"></script>
-    <script src="{{url_for('static', filename='js/lib/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{url_for('static', filename='bundles/bundle.js')}}"></script>
+    <link rel="stylesheet" href="../static/css/easy-lemon.css">
 </head>
 <body>
-<h1>Welcome to easy lemon!</h1>
-<div>
-<form>
-  Job Title/keywords:<br>
-  <input type="text" name="job-title" value="software engineer">
-  <br>
-  Location:<br>
-  <input type="text" name="job-location" value="san mateo">
-  <br>
-  Salary:<br>
-  <input type="text" name="job-salary" value="120000">
-  <br><br>
-  <input type="button" class="submit-button" value="Submit" onclick="submitJobSearch()">
-</form>
-
-<table id="results">
-    <thead>
-        <tr>
-            <th>Job Title</th><th>Job Company</th><th>Years of Experience</th><th>Job Salary</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-</table>
-</div>
+  <div id="easy-lemon-app"></div>
 </body>
 </html>

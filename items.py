@@ -12,11 +12,11 @@ class JobInfo(Item):
     """
     Models for Job Info
     """
-    job_title = Field()
-    job_location = Field()
-    job_url = Field()
-    job_company = Field()
-    job_salary = Field()
-    job_exp = Field()
-    job_points = Field()
+    jobTitle = Field()
+    jobLocation = Field()
+    jobUrl = Field()
+    jobCompany = Field()
+    jobSalary = Field()
+    jobExp = Field()
+    jobPoints = Field()
     pass

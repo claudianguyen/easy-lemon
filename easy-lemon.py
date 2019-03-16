@@ -9,7 +9,6 @@ from url.IndeedUrlCreator import IndeedUrlCreator
 from utils import FormatUtils
 
 
-
 # External lib
 from flask import Flask, render_template, request
 import json
@@ -41,6 +40,10 @@ def execute():
     Entry point for easy-lemon.py. This method begins the job search.
     """
     # Core logic that does the actual searching/parsing.
+
+    # Handle empty request:
+    if not request.data:
+        return None
 
     # Extract user-provided inputs.
     job_title = request.json['jobTitle']
@@ -83,7 +86,7 @@ def execute_indeed_query(job_query):
         return json.dumps(
             sorted(
                 job_results,
-                key=lambda result: result["job_points"],
+                key=lambda result: result["jobPoints"],
                 reverse=True))
 
 

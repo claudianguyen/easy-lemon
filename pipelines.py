@@ -14,7 +14,7 @@ class EasyLemonPipeline(object):
     """
     def process_item(self, item, spider):
         indeed_points_processor = IndeedJobPointsProcessor()
-        item["job_points"] = 0
-        computed_points = indeed_points_processor.compute_exp_points(item["job_exp"], item["job_salary"])
-        item["job_points"] = computed_points
+        item["jobPoints"] = 0
+        computed_points = indeed_points_processor.compute_exp_points(item["jobExp"], item["jobSalary"])
+        item["jobPoints"] = computed_points
         return item

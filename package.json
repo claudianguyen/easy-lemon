@@ -1,0 +1,40 @@
+{
+  "name": "easy-lemon",
+  "version": "1.0.0",
+  "description": "When life gives you lemons...",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify -d frontend/jsx/index.jsx > static/bundles/bundle.js -t [ babelify ]",
+    "watch": " watchify -d frontend/jsx/index.jsx -o static/bundles/bundle.js -v -t babelify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/claudianguyen/easy-lemon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/claudianguyen/easy-lemon/issues"
+  },
+  "homepage": "https://github.com/claudianguyen/easy-lemon#readme",
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.3",
+    "@babel/plugin-proposal-class-properties": "^7.3.3",
+    "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "babel-preset-react": "^6.24.1",
+    "babelify": "^10.0.0",
+    "browserify": "^16.2.3",
+    "watchify": "^3.11.1"
+  }
+}
