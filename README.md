@@ -1,14 +1,25 @@
-# easy-lemon
+# Easy-Lemon: A Centralized Job Seach 
 When life gives you lemons...
 
-***Link:***
-https://easy-lemon.herokuapp.com/
+## Demo
+Navigate to https://easy-lemon.herokuapp.com/
 
-***Python Requirements:***
-To download the Python3 requirements, run the following command:
-```
-cat requirements.txt | xargs -n 1 pip3 install
-```
+## Technologies Used
+  - Backend:
+      - Python 
+      - Scrapy API 
+  - Front-end:
+      - React.js
+      - HTML/CSS/JSX
+      - JQuery
+  - Deployment:
+      - Hosted on Heroku 
+      - Flask server
+ 
+## Features
+
+## Potential Future Features
+
 
 
 
