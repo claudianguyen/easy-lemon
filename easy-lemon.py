@@ -51,6 +51,13 @@ def execute():
     job_salary = request.json['jobSalary']
 
     job_query = build_job_query(job_title, job_location, job_salary)
+
+    # Temporary solution of writing job_query to file.
+    job_query_json = json.dumps(job_query.job_query)
+    job_query_file = open("job_query.txt", "w")
+    job_query_file.write(job_query_json)
+    job_query_file.close()
+
     return execute_indeed_query(job_query)
 
     # process.start()  # the script will block here until the crawling is finished

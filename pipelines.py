@@ -2,6 +2,8 @@
 
 from computation.IndeedJobPointsProcessor import IndeedJobPointsProcessor
 
+import json
+
 # Define your item pipelines here
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
@@ -14,7 +16,10 @@ class EasyLemonPipeline(object):
     """
     def process_item(self, item, spider):
         indeed_points_processor = IndeedJobPointsProcessor()
+        with open("job_query.txt", "r") as job_query_file:
+            job_query = json.load(job_query_file)
+        job_query_file.close()
         item["jobPoints"] = 0
-        computed_points = indeed_points_processor.compute_exp_points(item["jobExp"], item["jobSalary"])
+        computed_points = indeed_points_processor.compute_job_result_priority(item, job_query)
         item["jobPoints"] = computed_points
         return item
