@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 # Defined classes
+import pymongo as pymongo
+
 from entities.JobQuery import JobQuery
 from spiders.example import ExampleSpider
 from spiders.IndeedSpider import IndeedSpider
@@ -28,6 +30,9 @@ process = CrawlerProcess({
 
 crawler_settings = {'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'}
 
+client = pymongo.MongoClient("mongodb+srv://szhangada:Genesis6-4@genesis-jwgev.azure.mongodb.net/test?retryWrites=true")
+db = client.easy_lemon
+
 
 @app.route("/")
 def root():
@@ -48,9 +53,10 @@ def execute():
     # Extract user-provided inputs.
     job_title = request.json['jobTitle']
     job_location = request.json['jobLocation']
+    job_experience = request.json['jobExperience']
     job_salary = request.json['jobSalary']
 
-    job_query = build_job_query(job_title, job_location, job_salary)
+    job_query = build_job_query(job_title, job_location, job_experience, job_salary)
 
     # Temporary solution of writing job_query to file.
     job_query_json = json.dumps(job_query.job_query)
@@ -58,6 +64,9 @@ def execute():
     job_query_file.write(job_query_json)
     job_query_file.close()
 
+    # Insert into job_query collection.
+    job_queries = db.job_queries
+    job_queries.insert_one(job_query.job_query)
     return execute_indeed_query(job_query)
 
     # process.start()  # the script will block here until the crawling is finished
@@ -97,16 +106,17 @@ def execute_indeed_query(job_query):
                 reverse=True))
 
 
-def build_job_query(job_title, job_location, job_salary=""):
+def build_job_query(job_title, job_location, job_experience, job_salary=""):
     """
     Builds a JobQuery object. This method will deal with sanitization and lowercasing as well.
     TODO: Sanitization.
     :param job_title: The desired title for the job.
     :param job_location: The desired location for the job.
+    :param job_experience: The specified years of experience
     :param job_salary: The desired salary for the job.
     :return: JobQuery
     """
-    return JobQuery(job_title.lower(), job_location.lower(), job_salary.lower())
+    return JobQuery(job_title.lower(), job_location.lower(), job_experience, job_salary.lower())
 
 
 if __name__ == "__main__":

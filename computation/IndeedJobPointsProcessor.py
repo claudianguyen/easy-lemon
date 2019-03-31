@@ -23,7 +23,7 @@ class IndeedJobPointsProcessor(BaseJobPointsProcessor):
         :param job_query: Job_query provided by the user.
         :return: Point value for the given number of years of experience.
         """
-        desired_exp = job_query['jobExp']
+        desired_exp = job_query['experience']
         if exp == "N/A":
             return 0
         # Years of experience might be a range, so parse out the hyphen.

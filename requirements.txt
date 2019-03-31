@@ -6,6 +6,7 @@ Click==7.0
 constantly==15.1.0
 cryptography==2.4.2
 cssselect==1.0.3
+dnspython==1.16.0
 Flask==1.0.2
 gunicorn==19.9.0
 hyperlink==18.0.0
@@ -21,6 +22,7 @@ pyasn1-modules==0.2.3
 pycparser==2.19
 PyDispatcher==2.0.5
 PyHamcrest==1.9.0
+pymongo==3.7.2
 pyOpenSSL==18.0.0
 queuelib==1.5.0
 Scrapy==1.5.1
