@@ -15,6 +15,7 @@ from utils import FormatUtils
 from flask import Flask, render_template, request
 import json
 # import pandas as pd
+import os
 # import time
 from scrapy import Spider
 from scrapy.crawler import CrawlerProcess
@@ -30,7 +31,7 @@ process = CrawlerProcess({
 
 crawler_settings = {'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'}
 
-client = pymongo.MongoClient("mongodb+srv://szhangada:Genesis6-4@genesis-jwgev.azure.mongodb.net/test?retryWrites=true")
+client = pymongo.MongoClient(os.environ.get("MONGODB_CLIENT_CREDS"))
 db = client.easy_lemon
 
 
