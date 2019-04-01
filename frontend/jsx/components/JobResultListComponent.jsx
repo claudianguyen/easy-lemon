@@ -15,7 +15,7 @@ class JobResultListComponent extends React.Component {
       <div className="job-results-container">
         {
           jobResults.map(function(jobResult, index) {
-            return <JobResultComponent jobResult={jobResult} key={jobResult.jobTitle + index}/>
+            return <JobResultComponent jobResult={jobResult} key={index}/>
           })
         }
       </div>

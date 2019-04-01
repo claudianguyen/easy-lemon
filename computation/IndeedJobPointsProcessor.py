@@ -6,16 +6,6 @@ from utils import FormatUtils
 class IndeedJobPointsProcessor(BaseJobPointsProcessor):
     """ Represents a processor that computes the "job_points" for Indeed. """
 
-    def compute_job_result_priority(self, job_result, job_query):
-        """
-        Computes a "point-value" for the given job_result, which will be used for prioritization of the job_results.
-        :param job_result: The job_result to prioritize.
-        :param job_query: The job_query that the user provided.
-        :return: Point value for this job_result.
-        """
-
-        return super().compute_exp_points(job_result, job_query)
-
     def compute_exp_points(self, exp, job_query):
         """
         Computes the "point-value" for the given number of years of experience.
@@ -23,11 +13,11 @@ class IndeedJobPointsProcessor(BaseJobPointsProcessor):
         :param job_query: Job_query provided by the user.
         :return: Point value for the given number of years of experience.
         """
-        desired_exp = job_query['experience']
+        desired_exp = int(job_query.get_job_experience())
         if exp == "N/A":
             return 0
         # Years of experience might be a range, so parse out the hyphen.
-        years_of_exp = exp.split('-')
+        years_of_exp = exp.strip().split('-')
         # May contain a '+', so replace that with whitespace.
         exp_low = years_of_exp[0].replace('+', '').strip()
         if len(years_of_exp) > 1:

@@ -14,13 +14,13 @@ class JobResultComponent extends React.Component {
       <div>
         <div className="job-result">
           <h4>
-            <a className="job-title-text" target="_blank" href={jobResult.jobUrl}>{jobResult.jobTitle}</a>
+            <a className="job-title-text" target="_blank" href={jobResult.job_url}>{jobResult.job_title}</a>
           </h4>
           <div>
             <p>
-              <span className="job-company-text">{jobResult.jobCompany} </span>
-              <span className="job-experience-text">{jobResult.jobExperience}</span>
-              <span className="job-salary-text">{jobResult.jobSalary}</span>
+              <span className="job-company-text">{jobResult.job_company} </span>
+              <span className="job-experience-text">{jobResult.job_exp}</span>
+              <span className="job-salary-text">{jobResult.job_salary}</span>
             </p>
           </div>
         </div>
@@ -32,11 +32,11 @@ class JobResultComponent extends React.Component {
 // Props
 JobResultComponent.propTypes = {
   jobResult : PropTypes.shape({
-    jobTitle: PropTypes.string,
-    jobUrl: PropTypes.string,
-    jobCompany: PropTypes.string,
-    jobExperience: PropTypes.string,
-    jobSalary: PropTypes.string
+    job_title: PropTypes.string,
+    job_url: PropTypes.string,
+    job_company: PropTypes.string,
+    job_exp: PropTypes.string,
+    job_salary: PropTypes.string
   })
 };
 

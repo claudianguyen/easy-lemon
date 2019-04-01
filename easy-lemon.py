@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 # Defined classes
-import pymongo as pymongo
 
+from db.JobQueryService import JobQueryService
+from db.JobResultService import JobResultService
 from entities.JobQuery import JobQuery
-from spiders.example import ExampleSpider
 from spiders.IndeedSpider import IndeedSpider
 from url.IndeedUrlCreator import IndeedUrlCreator
 from utils import FormatUtils
@@ -31,8 +31,7 @@ process = CrawlerProcess({
 
 crawler_settings = {'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'}
 
-client = pymongo.MongoClient(os.environ.get("MONGODB_CLIENT_CREDS"))
-db = client.easy_lemon
+mongo_db_connection = os.environ.get("MONGO_DB_CLIENT_CREDS")
 
 
 @app.route("/")
@@ -59,21 +58,15 @@ def execute():
 
     job_query = build_job_query(job_title, job_location, job_experience, job_salary)
 
-    # Temporary solution of writing job_query to file.
-    job_query_json = json.dumps(job_query.job_query)
-    job_query_file = open("job_query.txt", "w")
-    job_query_file.write(job_query_json)
-    job_query_file.close()
-
     # Insert into job_query collection.
-    job_queries = db.job_queries
-    job_queries.insert_one(job_query.job_query)
-    return execute_indeed_query(job_query)
+    job_query_service = JobQueryService(mongo_db_connection)
+    job_query_id = job_query_service.insert_job_query(job_query.job_query).inserted_id
+    return execute_indeed_query(job_query, str(job_query_id))
 
     # process.start()  # the script will block here until the crawling is finished
 
 
-def execute_indeed_query(job_query):
+def execute_indeed_query(job_query, job_query_id):
     indeed_url_creator = \
         IndeedUrlCreator(job_query.get_job_title(), job_query.get_job_location(), job_query.get_job_salary())
 
@@ -88,23 +81,19 @@ def execute_indeed_query(job_query):
         '-a',
         'url=' + indeed_url_creator.generate_url(),
         '-a',
-        'num_results=' + '50'
+        'num_results=' + '50',
+        '-a',
+        'job_query_id=' + job_query_id
+
     ])
 
     # Return results back to frontend.
-    job_results = []
-    with open("output.json", "r+") as items_file:
-        for job_result in items_file:
-            job_results.append(json.loads(job_result))
-        items_file.close()
-        # Clear output.json file.
-        open("output.json", 'w').close()
+    job_results_service = JobResultService(mongo_db_connection)
+    job_results = job_results_service.find_job_results_by_query_id(job_query_id)
+    result = json.dumps([record for record in job_results])
+    job_results_service.delete_job_results_by_query_id(job_query_id)
 
-        return json.dumps(
-            sorted(
-                job_results,
-                key=lambda result: result["jobPoints"],
-                reverse=True))
+    return result
 
 
 def build_job_query(job_title, job_location, job_experience, job_salary=""):
@@ -117,7 +106,13 @@ def build_job_query(job_title, job_location, job_experience, job_salary=""):
     :param job_salary: The desired salary for the job.
     :return: JobQuery
     """
-    return JobQuery(job_title.lower(), job_location.lower(), job_experience, job_salary.lower())
+    job_query = {
+        'title': job_title.lower(),
+        'location': job_location.lower(),
+        'experience': job_experience.lower(),
+        'salary': job_salary.lower(),
+        'keywords': None}
+    return JobQuery(job_query)
 
 
 if __name__ == "__main__":
