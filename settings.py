@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import os
 # Scrapy settings for lemon_peeler project
 #
 # For simplicity, this file contains only settings considered important or
@@ -22,8 +23,12 @@ NEWSPIDER_MODULE = 'spiders'
 ROBOTSTXT_OBEY = True
 
 # Feed export settings.
-FEED_FORMAT = "jsonlines"
-FEED_URI = "output.json"
+# FEED_FORMAT = "jsonlines"
+# FEED_URI = "output.json"
+
+# DB Settings
+MONGO_URI = os.environ.get("MONGO_DB_CLIENT_CREDS")
+MONGO_DB = "easy_lemon"
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -68,9 +73,9 @@ FEED_URI = "output.json"
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-   'pipelines.EasyLemonPipeline': 300,
-}
+# ITEM_PIPELINES = {
+#    'pipelines.MongoDBPipeline': 400,
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html

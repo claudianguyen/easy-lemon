@@ -58,11 +58,12 @@ class JobSearchComponent extends React.Component {
         </div>
         <br/>
         <div className="job-search-param-div">
-          <label htmlFor="job-exp" className="job-search-label">Years of Experience</label>
+          <label htmlFor="job-experience" className="job-search-label">Years of Experience</label>
           <br/>
           <select 
             className="job-search-select"
-            onChange={(e) => this.props.handleJobQueryChange(e, JobSearchComponent.JOB_EXP)}>
+            id="job-experience"
+            onChange={(e) => this.props.handleJobQueryChange(e, JobSearchComponent.JOB_EXPERIENCE)}>
               {years.map(year =>
                 <option key={year} value={year}>{year}</option>)
               };
@@ -85,7 +86,7 @@ JobSearchComponent.propTypes = {
 JobSearchComponent.JOB_TITLE = "jobTitle";
 JobSearchComponent.JOB_LOCATION = "jobLocation";
 JobSearchComponent.JOB_SALARY = "jobSalary";
-JobSearchComponent.JOB_EXP = "jobExp";
+JobSearchComponent.JOB_EXPERIENCE = "jobExperience";
 
 
 export default JobSearchComponent;

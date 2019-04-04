@@ -16,7 +16,7 @@ class EasyLemon extends React.Component {
       jobTitle: "Software Engineer",
       jobLocation: "San Mateo",
       jobSalary: "120,000",
-      jobExp: "1",
+      jobExperience: "1",
       jobResults: [],
       showDialog: false,
       submissionDialogText:""
@@ -51,12 +51,13 @@ class EasyLemon extends React.Component {
   submitJobQuery() {
     let jobTitle = this.state.jobTitle;
     let jobLocation = this.state.jobLocation;
+    let jobExperience = this.state.jobExperience;
     let jobSalary = this.state.jobSalary;
     $.ajax({
       url: '/job_search',
       method: 'POST',
       contentType: 'application/json;charset=UTF-8',
-      data: JSON.stringify({jobTitle: jobTitle, jobLocation: jobLocation, jobSalary: jobSalary}),
+      data: JSON.stringify({jobTitle: jobTitle, jobLocation: jobLocation, jobExperience: jobExperience, jobSalary: jobSalary}),
       success: this.updateResults,
       error: this.handleError
     });
@@ -93,8 +94,8 @@ class EasyLemon extends React.Component {
       case JobSearchComponent.JOB_SALARY:
         this.setState({ jobSalary: e.target.value});
         break;
-      case JobSearchComponent.JOB_EXP:
-        this.setState({ jobExp: e.target.value});
+      case JobSearchComponent.JOB_EXPERIENCE:
+        this.setState({ jobExperience: e.target.value});
         break;
       default:
         return;

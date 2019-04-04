@@ -167,7 +167,7 @@ function (_React$Component) {
       jobTitle: "Software Engineer",
       jobLocation: "San Mateo",
       jobSalary: "120,000",
-      jobExp: "1",
+      jobExperience: "1",
       jobResults: [],
       showDialog: false,
       submissionDialogText: "" // Bind event handlers:
@@ -214,6 +214,7 @@ function (_React$Component) {
     value: function submitJobQuery() {
       var jobTitle = this.state.jobTitle;
       var jobLocation = this.state.jobLocation;
+      var jobExperience = this.state.jobExperience;
       var jobSalary = this.state.jobSalary;
       $.ajax({
         url: '/job_search',
@@ -222,6 +223,7 @@ function (_React$Component) {
         data: JSON.stringify({
           jobTitle: jobTitle,
           jobLocation: jobLocation,
+          jobExperience: jobExperience,
           jobSalary: jobSalary
         }),
         success: this.updateResults,
@@ -280,9 +282,9 @@ function (_React$Component) {
           });
           break;
 
-        case _JobSearchComponent.default.JOB_EXP:
+        case _JobSearchComponent.default.JOB_EXPERIENCE:
           this.setState({
-            jobExp: e.target.value
+            jobExperience: e.target.value
           });
           break;
 
@@ -432,14 +434,14 @@ function (_React$Component) {
       }, _react.default.createElement("h4", null, _react.default.createElement("a", {
         className: "job-title-text",
         target: "_blank",
-        href: jobResult.jobUrl
-      }, jobResult.jobTitle)), _react.default.createElement("div", null, _react.default.createElement("p", null, _react.default.createElement("span", {
+        href: jobResult.job_url
+      }, jobResult.job_title)), _react.default.createElement("div", null, _react.default.createElement("p", null, _react.default.createElement("span", {
         className: "job-company-text"
-      }, jobResult.jobCompany, " "), _react.default.createElement("span", {
+      }, jobResult.job_company, " "), _react.default.createElement("span", {
         className: "job-experience-text"
-      }, jobResult.jobExp), _react.default.createElement("span", {
+      }, jobResult.job_exp), _react.default.createElement("span", {
         className: "job-salary-text"
-      }, jobResult.jobSalary)))));
+      }, jobResult.job_salary)))));
     }
   }]);
 
@@ -449,11 +451,11 @@ function (_React$Component) {
 
 JobResultComponent.propTypes = {
   jobResult: _propTypes.default.shape({
-    jobTitle: _propTypes.default.string,
-    jobUrl: _propTypes.default.string,
-    jobCompany: _propTypes.default.string,
-    jobExp: _propTypes.default.string,
-    jobSalary: _propTypes.default.string
+    job_title: _propTypes.default.string,
+    job_url: _propTypes.default.string,
+    job_company: _propTypes.default.string,
+    job_exp: _propTypes.default.string,
+    job_salary: _propTypes.default.string
   })
 };
 var _default = JobResultComponent;
@@ -515,7 +517,7 @@ function (_React$Component) {
       }, jobResults.map(function (jobResult, index) {
         return _react.default.createElement(_JobResultComponent.default, {
           jobResult: jobResult,
-          key: jobResult.jobTitle + index
+          key: index
         });
       }));
     }
@@ -641,12 +643,13 @@ function (_React$Component) {
       })), _react.default.createElement("br", null), _react.default.createElement("div", {
         className: "job-search-param-div"
       }, _react.default.createElement("label", {
-        htmlFor: "job-exp",
+        htmlFor: "job-experience",
         className: "job-search-label"
       }, "Years of Experience"), _react.default.createElement("br", null), _react.default.createElement("select", {
         className: "job-search-select",
+        id: "job-experience",
         onChange: function onChange(e) {
-          return _this.props.handleJobQueryChange(e, JobSearchComponent.JOB_EXP);
+          return _this.props.handleJobQueryChange(e, JobSearchComponent.JOB_EXPERIENCE);
         }
       }, years.map(function (year) {
         return _react.default.createElement("option", {
@@ -673,7 +676,7 @@ JobSearchComponent.propTypes = {
 JobSearchComponent.JOB_TITLE = "jobTitle";
 JobSearchComponent.JOB_LOCATION = "jobLocation";
 JobSearchComponent.JOB_SALARY = "jobSalary";
-JobSearchComponent.JOB_EXP = "jobExp";
+JobSearchComponent.JOB_EXPERIENCE = "jobExperience";
 var _default = JobSearchComponent;
 exports.default = _default;
 
